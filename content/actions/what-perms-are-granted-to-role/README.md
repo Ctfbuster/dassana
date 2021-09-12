@@ -1,0 +1,261 @@
+## Determine permissions (and least privilege violations) for an IAM role
+
+Returns the policies attached to or embedded in an IAM role, along with cloudsplainer findings. 
+
+### Sample Input:
+```json
+{
+  "roleName": "ec2-dynamofull-test"
+}
+```
+
+### Sample Output:
+```json
+{
+  "result": 
+    {
+      "Policies": [
+         {
+            "PolicyArn":"arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
+            "PolicyName":"AmazonDynamoDBFullAccess",
+            "PolicyDocument":{
+               "Version":"2012-10-17",
+               "Statement":[
+                  {
+                     "Action":[
+                        "dynamodb:*",
+                        "dax:*",
+                        "application-autoscaling:DeleteScalingPolicy",
+                        "application-autoscaling:DeregisterScalableTarget",
+                        "application-autoscaling:DescribeScalableTargets",
+                        "application-autoscaling:DescribeScalingActivities",
+                        "application-autoscaling:DescribeScalingPolicies",
+                        "application-autoscaling:PutScalingPolicy",
+                        "application-autoscaling:RegisterScalableTarget",
+                        "cloudwatch:DeleteAlarms",
+                        "cloudwatch:DescribeAlarmHistory",
+                        "cloudwatch:DescribeAlarms",
+                        "cloudwatch:DescribeAlarmsForMetric",
+                        "cloudwatch:GetMetricStatistics",
+                        "cloudwatch:ListMetrics",
+                        "cloudwatch:PutMetricAlarm",
+                        "cloudwatch:GetMetricData",
+                        "datapipeline:ActivatePipeline",
+                        "datapipeline:CreatePipeline",
+                        "datapipeline:DeletePipeline",
+                        "datapipeline:DescribeObjects",
+                        "datapipeline:DescribePipelines",
+                        "datapipeline:GetPipelineDefinition",
+                        "datapipeline:ListPipelines",
+                        "datapipeline:PutPipelineDefinition",
+                        "datapipeline:QueryObjects",
+                        "ec2:DescribeVpcs",
+                        "ec2:DescribeSubnets",
+                        "ec2:DescribeSecurityGroups",
+                        "iam:GetRole",
+                        "iam:ListRoles",
+                        "kms:DescribeKey",
+                        "kms:ListAliases",
+                        "sns:CreateTopic",
+                        "sns:DeleteTopic",
+                        "sns:ListSubscriptions",
+                        "sns:ListSubscriptionsByTopic",
+                        "sns:ListTopics",
+                        "sns:Subscribe",
+                        "sns:Unsubscribe",
+                        "sns:SetTopicAttributes",
+                        "lambda:CreateFunction",
+                        "lambda:ListFunctions",
+                        "lambda:ListEventSourceMappings",
+                        "lambda:CreateEventSourceMapping",
+                        "lambda:DeleteEventSourceMapping",
+                        "lambda:GetFunctionConfiguration",
+                        "lambda:DeleteFunction",
+                        "resource-groups:ListGroups",
+                        "resource-groups:ListGroupResources",
+                        "resource-groups:GetGroup",
+                        "resource-groups:GetGroupQuery",
+                        "resource-groups:DeleteGroup",
+                        "resource-groups:CreateGroup",
+                        "tag:GetResources",
+                        "kinesis:ListStreams",
+                        "kinesis:DescribeStream",
+                        "kinesis:DescribeStreamSummary"
+                     ],
+                     "Effect":"Allow",
+                     "Resource":"*"
+                  },
+                  {
+                     "Action":"cloudwatch:GetInsightRuleReport",
+                     "Effect":"Allow",
+                     "Resource":"arn:aws:cloudwatch:*:*:insight-rule/DynamoDBContributorInsights*"
+                  },
+                  {
+                     "Action":[
+                        "iam:PassRole"
+                     ],
+                     "Effect":"Allow",
+                     "Resource":"*",
+                     "Condition":{
+                        "StringLike":{
+                           "iam:PassedToService":[
+                              "application-autoscaling.amazonaws.com",
+                              "application-autoscaling.amazonaws.com.cn",
+                              "dax.amazonaws.com"
+                           ]
+                        }
+                     }
+                  },
+                  {
+                     "Effect":"Allow",
+                     "Action":[
+                        "iam:CreateServiceLinkedRole"
+                     ],
+                     "Resource":"*",
+                     "Condition":{
+                        "StringEquals":{
+                           "iam:AWSServiceName":[
+                              "replication.dynamodb.amazonaws.com",
+                              "dax.amazonaws.com",
+                              "dynamodb.application-autoscaling.amazonaws.com",
+                              "contributorinsights.dynamodb.amazonaws.com",
+                              "kinesisreplication.dynamodb.amazonaws.com"
+                           ]
+                        }
+                     }
+                  }
+               ]
+            },
+            "PolicyFindings":{
+               "ServiceWildcard":[
+                  "dax",
+                  "dynamodb"
+               ],
+               "ServicesAffected":[
+                  "cloudwatch",
+                  "dax",
+                  "dynamodb",
+                  "iam",
+                  "lambda",
+                  "resource-groups",
+                  "sns"
+               ],
+               "PrivilegeEscalation":[
+                  
+               ],
+               "ResourceExposure":[
+                  "sns:SetTopicAttributes",
+                  "sns:CreateTopic",
+                  "iam:PassRole",
+                  "iam:CreateServiceLinkedRole"
+               ],
+               "DataExfiltration":[
+                  
+               ],
+               "CredentialsExposure":[
+                  
+               ],
+               "InfrastructureModification":[
+                  "cloudwatch:DeleteAlarms",
+                  "cloudwatch:PutMetricAlarm",
+                  "dax:BatchWriteItem",
+                  "dax:CreateCluster",
+                  "dax:DecreaseReplicationFactor",
+                  "dax:DeleteCluster",
+                  "dax:DeleteItem",
+                  "dax:IncreaseReplicationFactor",
+                  "dax:PutItem",
+                  "dax:RebootNode",
+                  "dax:TagResource",
+                  "dax:UntagResource",
+                  "dax:UpdateCluster",
+                  "dax:UpdateItem",
+                  "dynamodb:BatchWriteItem",
+                  "dynamodb:CreateBackup",
+                  "dynamodb:CreateGlobalTable",
+                  "dynamodb:CreateTable",
+                  "dynamodb:CreateTableReplica",
+                  "dynamodb:DeleteBackup",
+                  "dynamodb:DeleteItem",
+                  "dynamodb:DeleteTable",
+                  "dynamodb:DeleteTableReplica",
+                  "dynamodb:DisableKinesisStreamingDestination",
+                  "dynamodb:EnableKinesisStreamingDestination",
+                  "dynamodb:ExportTableToPointInTime",
+                  "dynamodb:PartiQLDelete",
+                  "dynamodb:PartiQLInsert",
+                  "dynamodb:PartiQLUpdate",
+                  "dynamodb:PutItem",
+                  "dynamodb:RestoreTableFromBackup",
+                  "dynamodb:RestoreTableToPointInTime",
+                  "dynamodb:TagResource",
+                  "dynamodb:UntagResource",
+                  "dynamodb:UpdateContinuousBackups",
+                  "dynamodb:UpdateContributorInsights",
+                  "dynamodb:UpdateGlobalTable",
+                  "dynamodb:UpdateGlobalTableSettings",
+                  "dynamodb:UpdateItem",
+                  "dynamodb:UpdateTable",
+                  "dynamodb:UpdateTableReplicaAutoScaling",
+                  "dynamodb:UpdateTimeToLive",
+                  "iam:CreateServiceLinkedRole",
+                  "iam:PassRole",
+                  "lambda:CreateFunction",
+                  "lambda:DeleteEventSourceMapping",
+                  "lambda:DeleteFunction",
+                  "resource-groups:DeleteGroup",
+                  "sns:CreateTopic",
+                  "sns:DeleteTopic",
+                  "sns:SetTopicAttributes",
+                  "sns:Subscribe"
+               ]
+            }
+         },
+         {
+            "PolicyArn":"arn:aws:iam::aws:policy/IAMReadOnlyAccess",
+            "PolicyName":"IAMReadOnlyAccess",
+            "PolicyDocument":{
+               "Version":"2012-10-17",
+               "Statement":[
+                  {
+                     "Effect":"Allow",
+                     "Action":[
+                        "iam:GenerateCredentialReport",
+                        "iam:GenerateServiceLastAccessedDetails",
+                        "iam:Get*",
+                        "iam:List*",
+                        "iam:SimulateCustomPolicy",
+                        "iam:SimulatePrincipalPolicy"
+                     ],
+                     "Resource":"*"
+                  }
+               ]
+            },
+            "PolicyFindings":{
+               "ServiceWildcard":[
+                  
+               ],
+               "ServicesAffected":[
+                  
+               ],
+               "PrivilegeEscalation":[
+                  
+               ],
+               "ResourceExposure":[
+                  
+               ],
+               "DataExfiltration":[
+                  
+               ],
+               "CredentialsExposure":[
+                  
+               ],
+               "InfrastructureModification":[
+                  
+               ]
+            }
+         }
+      ]
+    }
+}
+```
