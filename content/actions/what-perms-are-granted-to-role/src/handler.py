@@ -16,35 +16,48 @@ with open('input.json', 'r') as schema:
 
 @validator(inbound_schema=schema)
 def handle(event: Dict[str, Any], context: LambdaContext):
-    role_name = event.get('roleName')
     
     attached_policies = []
     inline_policies = []
+    exclusions_config = {}
     
-    exclusions_config = {} # How can this be configured?
+    iam_arn = event.get('iamArn')
     
-    client = dassana_aws.create_aws_client(context, 'iam', event.get('region'))
+    prefix, name = iam_arn.split("/")
+    prefix_parts = prefix.split(":")
     
-    response = client.list_attached_role_policies(
-        RoleName=role_name,
-        PathPrefix='/',
-        MaxItems=100
-    )
-    
-    for policy in response['AttachedPolicies']:
-        attached_policies.append({
-            'PolicyArn':policy['PolicyArn'], 
-            'PolicyName':policy['PolicyName']
-        })
-    
-    response = client.list_role_policies(
-        RoleName=role_name,
-        MaxItems=100
-    )
-    
-    for policy_name in response['PolicyNames']:
-        inline.policies({'PolicyName':policy_name})
-    
+    if prefix_parts[-1] == 'role':
+        client = dassana_aws.create_aws_client(context, 'iam', event.get('region'))
+        
+        paginator = client.get_paginator('list_attached_role_policies')
+        
+        page_iterator = paginator.paginate(
+            RoleName=name,
+            PathPrefix='/'
+        )
+        
+        for page in page_iterator:
+            for policy in page['AttachedPolicies']:
+                attached_policies.append({
+                    'PolicyArn':policy['PolicyArn'], 
+                    'PolicyName':policy['PolicyName']
+                })
+        
+        paginator = client.get_paginator('list_role_policies')
+        
+        page_iterator = paginator.paginate(
+            RoleName=name
+        )
+        
+        for page in page_iterator:
+            for policy_name in page['PolicyNames']:
+                inline.policies({'PolicyName':policy_name})
+    elif prefix_parts[-1] == 'user':
+        pass
+    else:
+        pass
+        
+    # Common iteration
     for policy in attached_policies:
         policy_basic = client.get_policy(
             PolicyArn=policy['PolicyArn']
@@ -65,7 +78,7 @@ def handle(event: Dict[str, Any], context: LambdaContext):
     
     for policy in inline_policies:
         policy_detailed = client.get_role_policy(
-            RoleName=role_name,
+            RoleName=name,
             PolicyName=policy['PolicyName']
         )
         
@@ -76,8 +89,7 @@ def handle(event: Dict[str, Any], context: LambdaContext):
         policy_finding = PolicyFinding(policy_document, exclusions)
         
         policy['PolicyFindings'] = policy_finding.results
-    
-    
-    response = dumps(attached_policies, default=str)
+        
+        
+    response = dumps({'Policies': attached_policies}, default=str)
     return {"result": loads(response)}
-
