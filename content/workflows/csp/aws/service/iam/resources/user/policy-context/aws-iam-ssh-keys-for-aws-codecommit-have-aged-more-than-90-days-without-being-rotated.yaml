@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-iam-ssh-keys-for-aws-codecommit-have-aged-more-than-90-days-without-being-rotated
+name: AWS IAM SSH keys for AWS CodeCommit have aged more than 90 days without being rotated
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: user
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authentication
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 3fb665cb-d0af-42e7-ba0f-1ddccd82356b
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "3fb665cb-d0af-42e7-ba0f-1ddccd82356b"
+ 
+risk-config:
+  default-risk: medium

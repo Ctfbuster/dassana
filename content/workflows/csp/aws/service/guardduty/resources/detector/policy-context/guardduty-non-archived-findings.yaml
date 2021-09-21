@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: guardduty-non-archived-findings
+name: GUARDDUTY-NON-ARCHIVED-FINDINGS
+labels:
+  - contextualization
+ 
+csp: aws
+service: guardduty
+resource-type: detector
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - guardduty-non-archived-findings
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("guardduty-non-archived-findings"))
+ 
+risk-config:
+  default-risk: ""

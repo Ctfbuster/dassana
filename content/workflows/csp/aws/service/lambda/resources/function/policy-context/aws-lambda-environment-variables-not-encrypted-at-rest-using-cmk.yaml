@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-lambda-environment-variables-not-encrypted-at-rest-using-cmk
+name: AWS Lambda Environment Variables not encrypted at-rest using CMK
+labels:
+  - contextualization
+ 
+csp: aws
+service: lambda
+resource-type: function
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 052c5035-c362-452d-b0dc-31aa3eff4aae
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "052c5035-c362-452d-b0dc-31aa3eff4aae"
+ 
+risk-config:
+  default-risk: low

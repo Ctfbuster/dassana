@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-kms-key-scheduled-for-deletion
+name: AWS KMS Key scheduled for deletion
+labels:
+  - contextualization
+ 
+csp: aws
+service: kms
+resource-type: key
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: key-management
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 4779ab55-2f4b-48cf-b4a9-828165a73f77
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "4779ab55-2f4b-48cf-b4a9-828165a73f77"
+ 
+risk-config:
+  default-risk: medium

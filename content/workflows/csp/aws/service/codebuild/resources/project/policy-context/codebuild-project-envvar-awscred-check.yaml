@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: codebuild-project-envvar-awscred-check
+name: CODEBUILD-PROJECT-ENVVAR-AWSCRED-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: codebuild
+resource-type: project
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: secret-management
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - codebuild-project-envvar-awscred-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("codebuild-project-envvar-awscred-check"))
+ 
+risk-config:
+  default-risk: critical

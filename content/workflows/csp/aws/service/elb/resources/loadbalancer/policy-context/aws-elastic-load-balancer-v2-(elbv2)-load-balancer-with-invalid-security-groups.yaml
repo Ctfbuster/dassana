@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-elastic-load-balancer-v2-(elbv2)-load-balancer-with-invalid-security-groups
+name: AWS Elastic Load Balancer v2 (ELBv2) load balancer with invalid security groups
+labels:
+  - contextualization
+ 
+csp: aws
+service: elb
+resource-type: loadbalancer
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - df15f8be-e55c-4b5b-84a6-910f346d173d
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "df15f8be-e55c-4b5b-84a6-910f346d173d"
+ 
+risk-config:
+  default-risk: medium

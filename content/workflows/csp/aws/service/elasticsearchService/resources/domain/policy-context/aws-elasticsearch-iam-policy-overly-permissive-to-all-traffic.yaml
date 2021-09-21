@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-elasticsearch-iam-policy-overly-permissive-to-all-traffic
+name: AWS Elasticsearch IAM policy overly permissive to all traffic
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticsearchService
+resource-type: domain
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - d4524070-4c2d-4316-bf67-3716d5667102
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "d4524070-4c2d-4316-bf67-3716d5667102"
+ 
+risk-config:
+  default-risk: high

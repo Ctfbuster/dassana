@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: lambda-inside-vpc
+name: LAMBDA-INSIDE-VPC
+labels:
+  - contextualization
+ 
+csp: aws
+service: lambda
+resource-type: function
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - lambda-inside-vpc
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("lambda-inside-vpc"))
+  - vendor: prisma-cloud
+    policies:
+      - af1a6f84-e6bd-4ccc-b682-c54838efe839
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "af1a6f84-e6bd-4ccc-b682-c54838efe839"
+ 
+risk-config:
+  default-risk: ""

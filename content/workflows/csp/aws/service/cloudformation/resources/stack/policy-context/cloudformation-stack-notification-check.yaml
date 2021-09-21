@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: cloudformation-stack-notification-check
+name: CLOUDFORMATION-STACK-NOTIFICATION-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudformation
+resource-type: stack
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudformation-stack-notification-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudformation-stack-notification-check"))
+  - vendor: prisma-cloud
+    policies:
+      - a89cca38-34d1-4c4e-b2dd-17654648a1ca
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "a89cca38-34d1-4c4e-b2dd-17654648a1ca"
+ 
+risk-config:
+  default-risk: ""

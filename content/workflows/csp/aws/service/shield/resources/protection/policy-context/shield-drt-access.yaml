@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: shield-drt-access
+name: SHIELD-DRT-ACCESS
+labels:
+  - contextualization
+ 
+csp: aws
+service: shield
+resource-type: protection
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - shield-drt-access
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("shield-drt-access"))
+ 
+risk-config:
+  default-risk: ""

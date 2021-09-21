@@ -12,7 +12,7 @@ resource-type: bucket
 
 class: risk
 subclass: config
-category: cryptography
+category: storage
 subcategory: encryption
 
 filters:

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-rds-db-snapshot-is-encrypted-using-default-kms-key-instead-of-cmk
+name: AWS RDS DB snapshot is encrypted using default KMS key instead of CMK
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 668068f4-3950-4acd-a565-b550095d6e22
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "668068f4-3950-4acd-a565-b550095d6e22"
+ 
+risk-config:
+  default-risk: medium

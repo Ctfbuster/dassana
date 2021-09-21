@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: desired-instance-tenancy
+name: DESIRED-INSTANCE-TENANCY
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: instance
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - desired-instance-tenancy
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("desired-instance-tenancy"))
+ 
+risk-config:
+  default-risk: ""

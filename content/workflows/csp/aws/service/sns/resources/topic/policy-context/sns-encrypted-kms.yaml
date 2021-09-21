@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: sns-encrypted-kms
+name: SNS-ENCRYPTED-KMS
+labels:
+  - contextualization
+ 
+csp: aws
+service: sns
+resource-type: topic
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - sns-encrypted-kms
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("sns-encrypted-kms"))
+  - vendor: prisma-cloud
+    policies:
+      - 23eea561-008b-498f-a2ff-8acc02aac35f
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "23eea561-008b-498f-a2ff-8acc02aac35f"
+ 
+risk-config:
+  default-risk: medium

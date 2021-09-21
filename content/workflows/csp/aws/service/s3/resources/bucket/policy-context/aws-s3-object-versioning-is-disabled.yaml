@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-s3-object-versioning-is-disabled
+name: AWS S3 Object Versioning is disabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: s3
+resource-type: bucket
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: availability
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 89ea62c1-3845-4134-b337-cc82203b8ff9
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "89ea62c1-3845-4134-b337-cc82203b8ff9"
+ 
+risk-config:
+  default-risk: medium

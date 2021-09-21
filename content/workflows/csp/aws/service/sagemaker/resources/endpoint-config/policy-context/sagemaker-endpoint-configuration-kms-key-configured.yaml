@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: sagemaker-endpoint-configuration-kms-key-configured
+name: SAGEMAKER-ENDPOINT-CONFIGURATION-KMS-KEY-CONFIGURED
+labels:
+  - contextualization
+ 
+csp: aws
+service: sagemaker
+resource-type: endpoint-config
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - sagemaker-endpoint-configuration-kms-key-configured
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("sagemaker-endpoint-configuration-kms-key-configured"))
+ 
+risk-config:
+  default-risk: ""

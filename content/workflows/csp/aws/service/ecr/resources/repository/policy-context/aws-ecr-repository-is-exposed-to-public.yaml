@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ecr-repository-is-exposed-to-public
+name: AWS ECR repository is exposed to public
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticContainerRegistry
+resource-type: repository
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: public-access
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 9f40d30b-97fd-4ec5-827b-f74b50a312b9
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "9f40d30b-97fd-4ec5-827b-f74b50a312b9"
+ 
+risk-config:
+  default-risk: high

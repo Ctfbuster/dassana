@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +25,10 @@ class WorkflowValidatorTest {
   @Inject WorkflowValidator workflowValidator;
   @Inject ContentManager contentManager;
   @Inject Gson gson;
+
+  void assertFail(String errMsg, Path path){
+    Assertions.fail(String.format("error in file: %s, %s", path.toFile().getName(), errMsg));
+  }
 
   @Test
   void handleValidate() throws Exception {
@@ -50,10 +55,10 @@ class WorkflowValidatorTest {
                 DassanaWorkflowValidationException dassanaWorkflowValidationException = (DassanaWorkflowValidationException) e;
                 List<Message> messages = dassanaWorkflowValidationException.getMessages();
                 for (Message message : messages) {
-                  Assertions.fail(message.getMsg());
+                  assertFail(message.getMsg(), path);
                 }
               } else {
-                Assertions.fail(e.getMessage());
+                assertFail(e.getMessage(), path);
               }
             }
 

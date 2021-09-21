@@ -50,7 +50,6 @@ public class S3Manager {
           "/resource_container=")
           .concat((String) workflowOutputWithRisk.getOutput().get("resourceContainer")).concat(
               "/region=").concat((String) workflowOutputWithRisk.getOutput().get("region")).concat(
-              "/service=").concat((String) workflowOutputWithRisk.getOutput().get("service")).concat(
               "/normalizer_workflow=").concat(workflowOutputWithRisk.getWorkflowId()).concat(
               "/alertid=").concat((String) workflowOutputWithRisk.getOutput().get("alertId"));
 

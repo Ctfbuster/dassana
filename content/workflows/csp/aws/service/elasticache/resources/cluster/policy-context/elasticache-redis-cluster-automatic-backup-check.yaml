@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: elasticache-redis-cluster-automatic-backup-check
+name: ELASTICACHE-REDIS-CLUSTER-AUTOMATIC-BACKUP-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticache
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: availability
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - elasticache-redis-cluster-automatic-backup-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("elasticache-redis-cluster-automatic-backup-check"))
+ 
+risk-config:
+  default-risk: ""

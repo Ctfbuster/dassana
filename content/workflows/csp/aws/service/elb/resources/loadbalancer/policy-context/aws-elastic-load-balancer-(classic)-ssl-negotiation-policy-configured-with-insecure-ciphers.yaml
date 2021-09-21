@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-elastic-load-balancer-(classic)-ssl-negotiation-policy-configured-with-insecure-ciphers
+name: AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers
+labels:
+  - contextualization
+ 
+csp: aws
+service: elb
+resource-type: loadbalancer
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - fed45316-6cae-4dac-aa57-fb451bacb149
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "fed45316-6cae-4dac-aa57-fb451bacb149"
+ 
+risk-config:
+  default-risk: medium

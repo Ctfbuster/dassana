@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sns-topic-not-configured-with-secure-data-transport-policy
+name: AWS SNS topic not configured with secure data transport policy
+labels:
+  - contextualization
+ 
+csp: aws
+service: sns
+resource-type: topic
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 3177364b-daca-42a3-876c-0ae3f8b88925
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "3177364b-daca-42a3-876c-0ae3f8b88925"
+ 
+risk-config:
+  default-risk: medium

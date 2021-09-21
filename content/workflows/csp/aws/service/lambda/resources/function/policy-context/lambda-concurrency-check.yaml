@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: lambda-concurrency-check
+name: LAMBDA-CONCURRENCY-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: lambda
+resource-type: function
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - lambda-concurrency-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("lambda-concurrency-check"))
+ 
+risk-config:
+  default-risk: ""

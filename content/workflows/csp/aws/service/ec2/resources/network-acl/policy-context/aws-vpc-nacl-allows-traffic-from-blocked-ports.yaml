@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-vpc-nacl-allows-traffic-from-blocked-ports
+name: AWS VPC NACL allows traffic from blocked ports
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: network-acl
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 98723199-7cc5-4dee-b667-4eec7fb55460
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "98723199-7cc5-4dee-b667-4eec7fb55460"
+ 
+risk-config:
+  default-risk: medium

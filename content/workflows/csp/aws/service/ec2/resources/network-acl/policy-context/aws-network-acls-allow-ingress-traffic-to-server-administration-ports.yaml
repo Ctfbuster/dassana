@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-network-acls-allow-ingress-traffic-to-server-administration-ports
+name: AWS Network ACLs allow ingress traffic to server administration ports
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: network-acl
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - b92edf01-d2c8-4f46-944d-e81b734d7600
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "b92edf01-d2c8-4f46-944d-e81b734d7600"
+ 
+risk-config:
+  default-risk: medium

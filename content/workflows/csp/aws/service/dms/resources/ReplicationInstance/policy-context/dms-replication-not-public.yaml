@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: dms-replication-not-public
+name: DMS-REPLICATION-NOT-PUBLIC
+labels:
+  - contextualization
+ 
+csp: aws
+service: dms
+resource-type: ReplicationInstance
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: public-access
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - dms-replication-not-public
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("dms-replication-not-public"))
+ 
+risk-config:
+  default-risk: critical

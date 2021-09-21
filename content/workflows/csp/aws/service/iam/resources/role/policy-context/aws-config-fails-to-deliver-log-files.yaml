@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-config-fails-to-deliver-log-files
+name: AWS Config fails to deliver log files
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: role
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 75a95357-3a98-41b9-9367-5d00fb1ab5f1
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "75a95357-3a98-41b9-9367-5d00fb1ab5f1"
+ 
+risk-config:
+  default-risk: medium

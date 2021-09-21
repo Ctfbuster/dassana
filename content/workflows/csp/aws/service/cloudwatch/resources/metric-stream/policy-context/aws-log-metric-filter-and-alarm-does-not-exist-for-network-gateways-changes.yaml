@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-log-metric-filter-and-alarm-does-not-exist-for-network-gateways-changes
+name: AWS Log metric filter and alarm does not exist for Network gateways changes
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - cb805020-1c1e-461f-aafc-4d0e49ca5592
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "cb805020-1c1e-461f-aafc-4d0e49ca5592"
+ 
+risk-config:
+  default-risk: low

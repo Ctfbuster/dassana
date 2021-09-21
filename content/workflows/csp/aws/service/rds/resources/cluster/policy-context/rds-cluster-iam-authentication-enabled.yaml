@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: rds-cluster-iam-authentication-enabled
+name: RDS-CLUSTER-IAM-AUTHENTICATION-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authentication
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - rds-cluster-iam-authentication-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("rds-cluster-iam-authentication-enabled"))
+ 
+risk-config:
+  default-risk: medium

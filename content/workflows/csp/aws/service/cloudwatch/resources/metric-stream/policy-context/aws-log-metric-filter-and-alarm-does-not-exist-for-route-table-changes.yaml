@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-log-metric-filter-and-alarm-does-not-exist-for-route-table-changes
+name: AWS Log metric filter and alarm does not exist for Route table changes
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 56bda49c-2091-43f0-a2b4-aa9cf4833d7c
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "56bda49c-2091-43f0-a2b4-aa9cf4833d7c"
+ 
+risk-config:
+  default-risk: low

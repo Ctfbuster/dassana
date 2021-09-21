@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: waf-classic-logging-enabled
+name: WAF-CLASSIC-LOGGING-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: waf
+resource-type: webacl
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - waf-classic-logging-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("waf-classic-logging-enabled"))
+ 
+risk-config:
+  default-risk: ""

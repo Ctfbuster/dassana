@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: rds-automatic-minor-version-upgrade-enabled
+name: RDS-AUTOMATIC-MINOR-VERSION-UPGRADE-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - rds-automatic-minor-version-upgrade-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("rds-automatic-minor-version-upgrade-enabled"))
+  - vendor: prisma-cloud
+    policies:
+      - 9dd6cc35-1855-48c8-86ba-0e1818ce11e2
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "9dd6cc35-1855-48c8-86ba-0e1818ce11e2"
+ 
+risk-config:
+  default-risk: high

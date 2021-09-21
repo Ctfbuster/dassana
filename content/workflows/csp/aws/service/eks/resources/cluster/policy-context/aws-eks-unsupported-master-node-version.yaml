@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-eks-unsupported-master-node-version
+name: AWS EKS unsupported Master node version
+labels:
+  - contextualization
+ 
+csp: aws
+service: eks
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 704cf655-e437-4741-a358-789c0af8474e
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "704cf655-e437-4741-a358-789c0af8474e"
+ 
+risk-config:
+  default-risk: high

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-log-metric-filter-and-alarm-does-not-exist-for-cloudtrail-configuration-changes
+name: AWS Log metric filter and alarm does not exist for CloudTrail configuration changes
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 528da278-3505-405c-8548-0555dafec3b3
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "528da278-3505-405c-8548-0555dafec3b3"
+ 
+risk-config:
+  default-risk: low

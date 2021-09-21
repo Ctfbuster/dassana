@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: ebs-optimized-instance
+name: EBS-OPTIMIZED-INSTANCE
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: instance
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - ebs-optimized-instance
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("ebs-optimized-instance"))
+ 
+risk-config:
+  default-risk: ""

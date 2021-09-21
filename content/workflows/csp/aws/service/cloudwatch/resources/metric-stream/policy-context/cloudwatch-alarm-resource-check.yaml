@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: cloudwatch-alarm-resource-check
+name: CLOUDWATCH-ALARM-RESOURCE-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudwatch-alarm-resource-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudwatch-alarm-resource-check"))
+ 
+risk-config:
+  default-risk: ""

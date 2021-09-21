@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: elb-custom-security-policy-ssl-check
+name: ELB-CUSTOM-SECURITY-POLICY-SSL-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: elb
+resource-type: loadbalancer
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - elb-custom-security-policy-ssl-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("elb-custom-security-policy-ssl-check"))
+ 
+risk-config:
+  default-risk: ""

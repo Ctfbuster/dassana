@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: sagemaker-notebook-no-direct-internet-access
+name: SAGEMAKER-NOTEBOOK-NO-DIRECT-INTERNET-ACCESS
+labels:
+  - contextualization
+ 
+csp: aws
+service: sagemaker
+resource-type: notebook-instance
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - sagemaker-notebook-no-direct-internet-access
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("sagemaker-notebook-no-direct-internet-access"))
+  - vendor: prisma-cloud
+    policies:
+      - 5c0ba8b1-9b88-486f-9fe1-a0eb9071a42b
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "5c0ba8b1-9b88-486f-9fe1-a0eb9071a42b"
+ 
+risk-config:
+  default-risk: high

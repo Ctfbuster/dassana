@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ecs-task-definition-logging-not-enabled
+name: AWS ECS task definition logging not enabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticContainerService
+resource-type: task-definition
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - c7edc846-e9eb-4c30-9869-af3604206d19
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "c7edc846-e9eb-4c30-9869-af3604206d19"
+ 
+risk-config:
+  default-risk: medium

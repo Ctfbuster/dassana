@@ -1500,7 +1500,7 @@ csp:
           - id: worldExportJob
           - id: worldGenerationJob
           - id: worldTemplate
-      - id: route 53
+      - id: route53
         name: Route 53
         resource-types:
           - id: change
@@ -1511,9 +1511,9 @@ csp:
           - id: trafficpolicy
           - id: trafficpolicyinstance
           - id: vpc
-      - id: route 53Domains
+      - id: route53Domains
         name: Route 53 Domains
-      - id: route 53Resolver
+      - id: route53Resolver
         name: Route 53 Resolver
         resource-types:
           - id: firewall-config

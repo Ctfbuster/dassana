@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-elastic-load-balancer-(classic)-ssl-negotiation-policy-configured-with-vulnerable-ssl-protocol
+name: AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol
+labels:
+  - contextualization
+ 
+csp: aws
+service: elb
+resource-type: loadbalancer
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 2bfc9a1e-bbad-4778-8116-99d07f1d2ba5
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "2bfc9a1e-bbad-4778-8116-99d07f1d2ba5"
+ 
+risk-config:
+  default-risk: medium

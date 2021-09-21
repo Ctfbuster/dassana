@@ -1,0 +1,71 @@
+# Resource Hierarchy
+
+When creating or modifying a `resource-context` or `policy-context` workflow, the following fields must be defined:
+
+-   `csp`: Represents the valid csp (cloud service provider). For example, aws is a csp.
+-   `service`: Each respective csp has a list of services under it. For example, under aws some valid services are: ec2, s3, etc.
+-   `resource-type`: Each service has a set a resource types. For example, the ec2 service has multiples resources including: instance, route-table, snapshot, etc.
+
+## Valid Mapping Example
+
+```yaml
+csp: aws
+service: ec2
+resource-type: instance
+```
+
+## Resource Hierarchy File
+
+The following file (trimmed for readability) showcases all of the available fields. [View full file on GitHub](https://github.com/dassana-io/dassana/blob/main/content/schemas/resource-hierarchy/resource-hierarchy.yaml).
+
+```yaml title="content/schemas/resource-hierarchy/resource-hierarchy.yaml"
+csp:
+    - id: aws
+      name: Amazon Web Services
+      services:
+          - id: cloudfront
+            resource-types:
+                - id: distribution
+          - id: cloudtrail
+            resource-types:
+                - id: trail
+          - id: config
+            resource-types:
+                - id: config-recorder
+          - id: ec2
+            resource-types:
+                - id: instance
+                - id: route-table
+                - id: security-group
+                - id: snapshot
+                - id: volume
+                - id: vpc-flow-log
+          - id: elasticloadbalancing
+            resource-types:
+                - id: loadbalancer
+          - id: iam
+            resource-types:
+                - id: policy
+                - id: user
+          - id: kms
+            resource-types:
+                - id: cmk
+          - id: rds
+            resource-types:
+                - id: instance
+                - id: snapshot
+          - id: redshift
+            resource-types:
+                - id: cluster
+          - id: s3
+            resource-types:
+                - id: bucket
+          - id: config
+            resource-types:
+                - id: config-recorder
+- id: demo-cloud
+  services:
+      - id: demo-service
+        resource-types:
+            - id: demo-resourceType
+```

@@ -1,0 +1,32 @@
+schema: 1
+type: policy-context
+
+id: ec2-instance-detailed-monitoring-enabled
+name: EC2-INSTANCE-DETAILED-MONITORING-ENABLED
+labels:
+  - contextualization
+
+csp: aws
+service: ec2
+resource-type: instance
+
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+
+filters:
+  - vendor: aws-config
+    policies:
+      - ec2-instance-detailed-monitoring-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("ec2-instance-detailed-monitoring-enabled"))
+  - vendor: prisma-cloud
+    policies:
+      - 03086f92-08cc-4779-9586-6117fa4cbf99
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "03086f92-08cc-4779-9586-6117fa4cbf99"
+risk-config:
+  default-risk: ""

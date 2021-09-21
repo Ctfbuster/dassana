@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: cloudwatch-alarm-action-check
+name: CLOUDWATCH-ALARM-ACTION-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: alarm
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudwatch-alarm-action-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudwatch-alarm-action-check"))
+ 
+risk-config:
+  default-risk: ""

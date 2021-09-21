@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: cloudtrail-s3-dataevents-enabled
+name: CLOUDTRAIL-S3-DATAEVENTS-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudtrail
+resource-type: trail
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudtrail-s3-dataevents-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudtrail-s3-dataevents-enabled"))
+ 
+risk-config:
+  default-risk: ""

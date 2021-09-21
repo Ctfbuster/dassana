@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: redshift-cluster-maintenancesettings-check
+name: REDSHIFT-CLUSTER-MAINTENANCESETTINGS-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: redshift
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - redshift-cluster-maintenancesettings-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("redshift-cluster-maintenancesettings-check"))
+ 
+risk-config:
+  default-risk: medium

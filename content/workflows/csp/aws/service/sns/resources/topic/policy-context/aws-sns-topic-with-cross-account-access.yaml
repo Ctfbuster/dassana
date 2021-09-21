@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sns-topic-with-cross-account-access
+name: AWS SNS topic with cross-account access
+labels:
+  - contextualization
+ 
+csp: aws
+service: sns
+resource-type: topic
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 590cd7d9-9085-428b-bfbe-b407be7a6203
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "590cd7d9-9085-428b-bfbe-b407be7a6203"
+ 
+risk-config:
+  default-risk: low

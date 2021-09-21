@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-log-metric-filter-and-alarm-does-not-exist-for-aws-config-configuration-changes
+name: AWS Log metric filter and alarm does not exist for AWS Config configuration changes
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - dfd6e8a5-83a5-403a-bd4a-3592b910b32b
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "dfd6e8a5-83a5-403a-bd4a-3592b910b32b"
+ 
+risk-config:
+  default-risk: low

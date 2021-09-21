@@ -48,6 +48,8 @@ output:
     value: ."resource-info".resourceId
   - name: tags
     value: ."getTags"
+  - name: alertClassification
+    value: ."lookup".alertClassification
 
 post-processor:
   steps:

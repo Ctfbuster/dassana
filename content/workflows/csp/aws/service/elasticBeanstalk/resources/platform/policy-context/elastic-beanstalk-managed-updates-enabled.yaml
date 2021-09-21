@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: elastic-beanstalk-managed-updates-enabled
+name: ELASTIC-BEANSTALK-MANAGED-UPDATES-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticBeanstalk
+resource-type: platform
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - elastic-beanstalk-managed-updates-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("elastic-beanstalk-managed-updates-enabled"))
+ 
+risk-config:
+  default-risk: high

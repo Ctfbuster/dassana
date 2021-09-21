@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-redshift-database-does-not-have-audit-logging-enabled
+name: AWS Redshift database does not have audit logging enabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: redshift
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 91c941aa-d110-4b33-9934-aadd86b1a4d9
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "91c941aa-d110-4b33-9934-aadd86b1a4d9"
+ 
+risk-config:
+  default-risk: medium

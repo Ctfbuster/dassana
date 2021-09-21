@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-rds-retention-policy-less-than-7-days
+name: AWS RDS retention policy less than 7 days
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: availability
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - bf55f5c1-d05d-4e2a-bd39-560f7900be88
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "bf55f5c1-d05d-4e2a-bd39-560f7900be88"
+ 
+risk-config:
+  default-risk: medium

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-elasticsearch-domain-has-search-slow-logs-set-to-disabled
+name: AWS Elasticsearch domain has Search slow logs set to disabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticsearchService
+resource-type: domain
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 59c82c7e-2884-4c65-a307-eba3a6fc27d7
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "59c82c7e-2884-4c65-a307-eba3a6fc27d7"
+ 
+risk-config:
+  default-risk: low

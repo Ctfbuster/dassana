@@ -7,9 +7,7 @@ id: prisma-cloud
 filters:
   - match-type: all
     rules:
-      - .policy and .policy.policyId
-      - .policy.policyType| contains ("config")
-      - .resource.rrn| contains ("rrn")
+      - .source == "Prisma Cloud"
 
 # notice that we are using a look-up step here. This step looks up vendorPolicy in the policy context workflow files and returns service and resource type information
 
@@ -25,6 +23,7 @@ steps:
 output:
   - name: vendorId
     value: prisma-cloud
+    value-type: STRING
   - name: alertId
     value: ."lookup".alertId
   - name: vendorPolicy

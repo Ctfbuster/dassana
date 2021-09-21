@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-log-metric-filter-and-alarm-does-not-exist-for-iam-policy-changes
+name: AWS Log metric filter and alarm does not exist for IAM policy changes
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 84ff41af-e3f2-406e-8282-962d6413fd28
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "84ff41af-e3f2-406e-8282-962d6413fd28"
+ 
+risk-config:
+  default-risk: low

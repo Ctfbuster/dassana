@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: cloudwatch-alarm-settings-check
+name: CLOUDWATCH-ALARM-SETTINGS-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: alarm
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudwatch-alarm-settings-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudwatch-alarm-settings-check"))
+ 
+risk-config:
+  default-risk: ""

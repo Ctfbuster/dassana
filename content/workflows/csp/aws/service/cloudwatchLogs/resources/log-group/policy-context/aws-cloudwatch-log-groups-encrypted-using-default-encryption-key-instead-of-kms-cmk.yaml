@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-cloudwatch-log-groups-encrypted-using-default-encryption-key-instead-of-kms-cmk
+name: AWS CloudWatch Log groups encrypted using default encryption key instead of KMS CMK
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatchLogs
+resource-type: log-group
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: key-management
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 1a2df8bc-9c9f-457a-95be-360f8514b043
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "1a2df8bc-9c9f-457a-95be-360f8514b043"
+ 
+risk-config:
+  default-risk: low

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-vpc-endpoint-policy-is-overly-permissive
+name: AWS VPC endpoint policy is overly permissive
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: vpc-endpoint
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 4d0841e4-c65b-47b0-b8df-12c619d91c4c
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "4d0841e4-c65b-47b0-b8df-12c619d91c4c"
+ 
+risk-config:
+  default-risk: medium

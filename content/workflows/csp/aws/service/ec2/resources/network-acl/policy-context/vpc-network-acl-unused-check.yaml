@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: vpc-network-acl-unused-check
+name: VPC-NETWORK-ACL-UNUSED-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: network-acl
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - vpc-network-acl-unused-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("vpc-network-acl-unused-check"))
+ 
+risk-config:
+  default-risk: low

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-rds-event-subscription-disabled-for-db-instance
+name: AWS RDS event subscription disabled for DB instance
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - b858fad6-4f4a-49ec-b14e-b2c4639b3b1a
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "b858fad6-4f4a-49ec-b14e-b2c4639b3b1a"
+ 
+risk-config:
+  default-risk: medium

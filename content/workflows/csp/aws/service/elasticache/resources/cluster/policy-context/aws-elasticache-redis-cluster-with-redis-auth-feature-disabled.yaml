@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-elasticache-redis-cluster-with-redis-auth-feature-disabled
+name: AWS ElastiCache Redis cluster with Redis AUTH feature disabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticache
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authentication
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 2e9b2375-cd85-4569-b90b-65cdbb4fd0b6
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "2e9b2375-cd85-4569-b90b-65cdbb4fd0b6"
+ 
+risk-config:
+  default-risk: medium

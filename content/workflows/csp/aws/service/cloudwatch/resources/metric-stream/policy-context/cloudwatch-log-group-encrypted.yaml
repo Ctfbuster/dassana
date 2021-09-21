@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: cloudwatch-log-group-encrypted
+name: CLOUDWATCH-LOG-GROUP-ENCRYPTED
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudwatch-log-group-encrypted
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudwatch-log-group-encrypted"))
+ 
+risk-config:
+  default-risk: ""

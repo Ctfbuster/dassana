@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-iam-user-has-two-active-access-keys
+name: AWS IAM user has two active Access Keys
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: user
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authentication
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - e809c246-2ef5-4319-bba9-2c5735d88aa8
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "e809c246-2ef5-4319-bba9-2c5735d88aa8"
+ 
+risk-config:
+  default-risk: medium

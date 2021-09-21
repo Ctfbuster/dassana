@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-lambda-functions-with-tracing-not-enabled
+name: AWS Lambda functions with tracing not enabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: lambda
+resource-type: function
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - a277bd9d-0557-4a5d-87d7-5bd6fb9ecdd0
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "a277bd9d-0557-4a5d-87d7-5bd6fb9ecdd0"
+ 
+risk-config:
+  default-risk: medium

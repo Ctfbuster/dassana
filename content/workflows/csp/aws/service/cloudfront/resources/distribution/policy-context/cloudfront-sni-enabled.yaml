@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: cloudfront-sni-enabled
+name: CLOUDFRONT-SNI-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudfront
+resource-type: distribution
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudfront-sni-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudfront-sni-enabled"))
+ 
+risk-config:
+  default-risk: ""

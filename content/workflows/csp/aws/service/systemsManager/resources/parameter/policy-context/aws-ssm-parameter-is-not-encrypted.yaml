@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ssm-parameter-is-not-encrypted
+name: AWS SSM Parameter is not encrypted
+labels:
+  - contextualization
+ 
+csp: aws
+service: systemsManager
+resource-type: parameter
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 926b7056-6a39-4885-a806-8e4cf958fced
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "926b7056-6a39-4885-a806-8e4cf958fced"
+ 
+risk-config:
+  default-risk: medium

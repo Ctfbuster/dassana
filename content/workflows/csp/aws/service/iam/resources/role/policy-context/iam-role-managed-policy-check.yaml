@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: iam-role-managed-policy-check
+name: IAM-ROLE-MANAGED-POLICY-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: role
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - iam-role-managed-policy-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("iam-role-managed-policy-check"))
+ 
+risk-config:
+  default-risk: ""

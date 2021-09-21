@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-kms-key-policy-overly-permissive
+name: AWS KMS Key policy overly permissive
+labels:
+  - contextualization
+ 
+csp: aws
+service: kms
+resource-type: key
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 2b68ad79-4c8b-48dd-8459-2d86203e862b
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "2b68ad79-4c8b-48dd-8459-2d86203e862b"
+ 
+risk-config:
+  default-risk: high

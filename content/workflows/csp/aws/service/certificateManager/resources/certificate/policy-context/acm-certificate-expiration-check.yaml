@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: acm-certificate-expiration-check
+name: ACM-CERTIFICATE-EXPIRATION-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: certificateManager
+resource-type: certificate
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: certificate-management
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - acm-certificate-expiration-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("acm-certificate-expiration-check"))
+  - vendor: prisma-cloud
+    policies:
+      - 369dcce6-f088-445d-95a7-777af0347821
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "369dcce6-f088-445d-95a7-777af0347821"
+
+risk-config:
+  default-risk: medium

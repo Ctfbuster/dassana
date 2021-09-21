@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-network-acls-with-inbound-rule-to-allow-all-traffic
+name: AWS Network ACLs with Inbound rule to allow All Traffic
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: network-acl
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - e50e3c0a-01ac-48fc-8972-f1313c72de71
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "e50e3c0a-01ac-48fc-8972-f1313c72de71"
+ 
+risk-config:
+  default-risk: medium

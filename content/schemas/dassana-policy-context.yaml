@@ -6,7 +6,7 @@ name: str(required=False)
 labels: list(required=False)
 
 csp: enum('aws','demo-cloud')
-service: enum('s3', 'cloudfront', 'elasticloadbalancing', 'redshift', 'cloudtrail', 'iam', 'rds', 'ec2', 'kms')
+service: enum('s3', 'cloudfront', 'elb', 'redshift', 'cloudtrail', 'iam', 'rds', 'ec2', 'kms')
 resource-type: enum('bucket',
   'distribution',
   'loadbalancer',

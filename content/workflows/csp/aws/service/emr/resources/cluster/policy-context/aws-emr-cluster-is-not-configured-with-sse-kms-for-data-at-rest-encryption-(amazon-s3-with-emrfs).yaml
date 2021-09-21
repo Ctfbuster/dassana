@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-emr-cluster-is-not-configured-with-sse-kms-for-data-at-rest-encryption-(amazon-s3-with-emrfs)
+name: AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)
+labels:
+  - contextualization
+ 
+csp: aws
+service: emr
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 66958003-19e7-4aac-bed2-1d488b25702b
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "66958003-19e7-4aac-bed2-1d488b25702b"
+ 
+risk-config:
+  default-risk: medium

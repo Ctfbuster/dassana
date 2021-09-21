@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-log-metric-filter-and-alarm-does-not-exist-for-aws-management-console-authentication-failures
+name: AWS Log metric filter and alarm does not exist for AWS management console authentication failures
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 2568d866-2a59-4246-83fd-3c2ab3e1cf92
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "2568d866-2a59-4246-83fd-3c2ab3e1cf92"
+ 
+risk-config:
+  default-risk: low

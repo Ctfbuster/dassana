@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-database-migration-service-endpoint-do-not-have-ssl-configured
+name: AWS Database Migration Service endpoint do not have SSL configured
+labels:
+  - contextualization
+ 
+csp: aws
+service: dms
+resource-type: Endpoint
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 447fc9ef-a871-4e4b-b34c-46d4aad81f51
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "447fc9ef-a871-4e4b-b34c-46d4aad81f51"
+ 
+risk-config:
+  default-risk: medium

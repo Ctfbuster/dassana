@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: rds-multi-az-support
+name: RDS-MULTI-AZ-SUPPORT
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: availability
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - rds-multi-az-support
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("rds-multi-az-support"))
+  - vendor: prisma-cloud
+    policies:
+      - c5305272-a732-4e8e-8427-6a9701cd2a6f
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "c5305272-a732-4e8e-8427-6a9701cd2a6f"
+ 
+risk-config:
+  default-risk: medium

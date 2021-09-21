@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ec2-instance-scheduled-events
+name: AWS EC2 Instance Scheduled Events
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: instance
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: hygiene
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - e1d64985-045e-4a48-9a92-da1a16dcd3eb
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "e1d64985-045e-4a48-9a92-da1a16dcd3eb"
+ 
+risk-config:
+  default-risk: medium

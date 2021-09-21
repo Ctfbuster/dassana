@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-eks-cluster-using-the-default-vpc
+name: AWS EKS cluster using the default VPC
+labels:
+  - contextualization
+ 
+csp: aws
+service: eks
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 531d82cd-5d3f-4d2f-ba89-bf3f8f35dab6
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "531d82cd-5d3f-4d2f-ba89-bf3f8f35dab6"
+ 
+risk-config:
+  default-risk: medium

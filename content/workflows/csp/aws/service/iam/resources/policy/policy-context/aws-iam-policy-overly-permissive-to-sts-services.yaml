@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-iam-policy-overly-permissive-to-sts-services
+name: AWS IAM policy overly permissive to STS services
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: policy
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 861c6df0-9663-42aa-b729-5218fccc9b50
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "861c6df0-9663-42aa-b729-5218fccc9b50"
+ 
+risk-config:
+  default-risk: low

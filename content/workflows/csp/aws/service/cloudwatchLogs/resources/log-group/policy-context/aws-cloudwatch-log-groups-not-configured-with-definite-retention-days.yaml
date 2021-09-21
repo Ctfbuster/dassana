@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-cloudwatch-log-groups-not-configured-with-definite-retention-days
+name: AWS CloudWatch Log groups not configured with definite retention days
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatchLogs
+resource-type: log-group
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - ebb95367-d356-4be9-a7d1-19e78f29cf18
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "ebb95367-d356-4be9-a7d1-19e78f29cf18"
+ 
+risk-config:
+  default-risk: low

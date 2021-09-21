@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sagemaker-notebook-instance-iam-policy-overly-permissive-to-all-traffic
+name: AWS SageMaker notebook instance IAM policy overly permissive to all traffic
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: policy
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - cd2dd664-59a9-469d-a6d0-d6f4a9f8d94c
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "cd2dd664-59a9-469d-a6d0-d6f4a9f8d94c"
+ 
+risk-config:
+  default-risk: high

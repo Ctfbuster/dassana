@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: api-gw-cache-enabled-and-encrypted
+name: API-GW-CACHE-ENABLED-AND-ENCRYPTED
+labels:
+  - contextualization
+ 
+csp: aws
+service: apiGateway
+resource-type: Stages
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - api-gw-cache-enabled-and-encrypted
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("api-gw-cache-enabled-and-encrypted"))
+ 
+risk-config:
+  default-risk: ""

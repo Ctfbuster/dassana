@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: emr-kerberos-enabled
+name: EMR-KERBEROS-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: emr
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authentication
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - emr-kerberos-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("emr-kerberos-enabled"))
+  - vendor: prisma-cloud
+    policies:
+      - 5e2afd31-8a97-489b-a3ea-0378a29ce76a
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "5e2afd31-8a97-489b-a3ea-0378a29ce76a"
+ 
+risk-config:
+  default-risk: ""

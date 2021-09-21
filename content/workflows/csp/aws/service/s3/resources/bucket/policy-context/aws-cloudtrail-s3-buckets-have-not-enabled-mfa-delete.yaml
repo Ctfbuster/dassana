@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-cloudtrail-s3-buckets-have-not-enabled-mfa-delete
+name: AWS CloudTrail S3 buckets have not enabled MFA Delete
+labels:
+  - contextualization
+ 
+csp: aws
+service: s3
+resource-type: bucket
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authentication
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - ed8d6416-1064-4e78-9e34-02336894df44
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "ed8d6416-1064-4e78-9e34-02336894df44"
+ 
+risk-config:
+  default-risk: low

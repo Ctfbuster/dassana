@@ -1,0 +1,32 @@
+schema: 1
+type: policy-context
+
+id: ec2-instances-in-vpc
+name: EC2-INSTANCES-IN-VPC
+labels:
+  - contextualization
+
+csp: aws
+service: ec2
+resource-type: instance
+
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+
+filters:
+  - vendor: aws-config
+    policies:
+      - ec2-instances-in-vpc
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("ec2-instances-in-vpc"))
+  - vendor: prisma-cloud
+    policies:
+      - 54dcf5c3-bd8f-4a48-b41b-74595cbd9891
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "54dcf5c3-bd8f-4a48-b41b-74595cbd9891"
+risk-config:
+  default-risk: ""

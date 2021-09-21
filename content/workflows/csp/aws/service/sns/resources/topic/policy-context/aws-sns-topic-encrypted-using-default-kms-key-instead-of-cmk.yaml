@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sns-topic-encrypted-using-default-kms-key-instead-of-cmk
+name: AWS SNS topic encrypted using default KMS key instead of CMK
+labels:
+  - contextualization
+ 
+csp: aws
+service: sns
+resource-type: topic
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: key-management
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 961661ed-cd35-4fa7-91f3-8227b2d3704a
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "961661ed-cd35-4fa7-91f3-8227b2d3704a"
+ 
+risk-config:
+  default-risk: medium

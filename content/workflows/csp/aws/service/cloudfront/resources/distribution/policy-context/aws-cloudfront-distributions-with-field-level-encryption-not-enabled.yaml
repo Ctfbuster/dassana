@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-cloudfront-distributions-with-field-level-encryption-not-enabled
+name: AWS CloudFront Distributions with Field-Level Encryption not enabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudfront
+resource-type: distribution
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 8e9eee5e-6066-463a-98e0-edf4e98cee00
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "8e9eee5e-6066-463a-98e0-edf4e98cee00"
+ 
+risk-config:
+  default-risk: medium

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-iam-policy-is-overly-permissive-to-all-traffic-via-condition-clause
+name: AWS IAM policy is overly permissive to all traffic via condition clause
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: policy
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - e575091e-cf1b-48b1-9b6c-f4831568d59f
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "e575091e-cf1b-48b1-9b6c-f4831568d59f"
+ 
+risk-config:
+  default-risk: high

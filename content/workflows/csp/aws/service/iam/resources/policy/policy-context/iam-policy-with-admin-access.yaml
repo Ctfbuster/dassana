@@ -25,9 +25,11 @@ filters:
   - vendor: prisma-cloud
     policies:
       - "d9b86448-11a2-f9d4-74a5-f6fc590caeef"
+      - "3b165f8d-1a65-41db-848d-d3783c4490ce"
     match-type: any
     rules:
       - .vendorId == "prisma-cloud" and .vendorPolicy == "d9b86448-11a2-f9d4-74a5-f6fc590caeef"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "3b165f8d-1a65-41db-848d-d3783c4490ce"
 
 risk-config:
   default-risk: low

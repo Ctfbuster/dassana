@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-certificate-manager-(acm)-has-unused-certificates
+name: AWS Certificate Manager (ACM) has unused certificates
+labels:
+  - contextualization
+ 
+csp: aws
+service: certificateManager
+resource-type: certificate
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: certificate-management
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - e8fe99a1-7b84-4b9e-a0e7-0777b12cb081
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "e8fe99a1-7b84-4b9e-a0e7-0777b12cb081"
+ 
+risk-config:
+  default-risk: medium

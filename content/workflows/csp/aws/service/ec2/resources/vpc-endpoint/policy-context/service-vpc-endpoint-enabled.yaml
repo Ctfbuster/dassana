@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: service-vpc-endpoint-enabled
+name: SERVICE-VPC-ENDPOINT-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: vpc-endpoint
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - service-vpc-endpoint-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("service-vpc-endpoint-enabled"))
+ 
+risk-config:
+  default-risk: medium

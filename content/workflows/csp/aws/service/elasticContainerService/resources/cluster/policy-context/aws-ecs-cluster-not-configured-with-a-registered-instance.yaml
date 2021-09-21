@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ecs-cluster-not-configured-with-a-registered-instance
+name: AWS ECS cluster not configured with a registered instance
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticContainerService
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: hygiene
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - d657f5f1-6055-44b6-8f7d-15f011e90c18
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "d657f5f1-6055-44b6-8f7d-15f011e90c18"
+ 
+risk-config:
+  default-risk: low

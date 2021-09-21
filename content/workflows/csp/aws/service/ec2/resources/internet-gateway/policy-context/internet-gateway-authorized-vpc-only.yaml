@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: internet-gateway-authorized-vpc-only
+name: INTERNET-GATEWAY-AUTHORIZED-VPC-ONLY
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: internet-gateway
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - internet-gateway-authorized-vpc-only
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("internet-gateway-authorized-vpc-only"))
+ 
+risk-config:
+  default-risk: ""

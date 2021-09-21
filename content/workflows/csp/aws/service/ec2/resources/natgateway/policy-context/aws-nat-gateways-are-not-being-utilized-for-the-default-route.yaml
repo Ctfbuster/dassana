@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-nat-gateways-are-not-being-utilized-for-the-default-route
+name: AWS NAT Gateways are not being utilized for the default route
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: natgateway
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: availability
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - bbfd1fec-c777-4265-a307-fbca4a5912e7
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "bbfd1fec-c777-4265-a307-fbca4a5912e7"
+ 
+risk-config:
+  default-risk: medium

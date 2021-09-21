@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: lambda-dlq-check
+name: LAMBDA-DLQ-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: lambda
+resource-type: function
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - lambda-dlq-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("lambda-dlq-check"))
+ 
+risk-config:
+  default-risk: medium

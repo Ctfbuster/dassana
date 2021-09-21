@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-log-metric-filter-and-alarm-does-not-exist-for-unauthorized-api-calls
+name: AWS Log metric filter and alarm does not exist for unauthorized API calls
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 9603b1b9-89a7-406a-8e7a-7bd870145136
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "9603b1b9-89a7-406a-8e7a-7bd870145136"
+ 
+risk-config:
+  default-risk: low

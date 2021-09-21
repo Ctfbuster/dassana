@@ -2,14 +2,14 @@ schema: 1
 type: general-context
 
 id: general-context-aws
-name: This workflow sets the "general" risk based on tags of the resources. It is expected that the normalizer has resturned "tags" in the output
+name: This workflow sets the "general" risk based on tags of the resources. It is expected that the normalizer has returned "tags" in the output
 
 csp: aws
 
 filters:
   - match-type: all
     rules:
-      - .csp=="aws" and (.tags| length >0) and .resourceType != "AwsAccount" # for alerts belonging to an account, the resource type is set to "AwsAccount" by security hub
+      - .csp=="aws" and .resourceType != "AwsAccount" # for alerts belonging to an account, the resource type is set to "AwsAccount" by security hub
       #todo: try to get tags from aws org for the account
 
 risk-config:

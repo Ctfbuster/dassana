@@ -12,7 +12,7 @@ resource-type: bucket
 
 class: risk
 subclass: config
-category: access-sharing
+category: iam
 subcategory: public-access
 
 filters:

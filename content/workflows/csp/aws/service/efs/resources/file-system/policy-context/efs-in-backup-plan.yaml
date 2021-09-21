@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: efs-in-backup-plan
+name: EFS-IN-BACKUP-PLAN
+labels:
+  - contextualization
+ 
+csp: aws
+service: efs
+resource-type: file-system
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: availability
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - efs-in-backup-plan
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("efs-in-backup-plan"))
+ 
+risk-config:
+  default-risk: medium

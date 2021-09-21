@@ -12,7 +12,7 @@ resource-type: trail
 
 class: risk
 subclass: config
-category: cryptography
+category: storage
 subcategory: encryption
 
 filters:

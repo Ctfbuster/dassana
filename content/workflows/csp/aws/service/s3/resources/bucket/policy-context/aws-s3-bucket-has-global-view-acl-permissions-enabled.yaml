@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-s3-bucket-has-global-view-acl-permissions-enabled
+name: AWS S3 bucket has global view ACL permissions enabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: s3
+resource-type: bucket
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 43c42760-5283-4bc4-ac43-a80e58c4139f
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "43c42760-5283-4bc4-ac43-a80e58c4139f"
+ 
+risk-config:
+  default-risk: low

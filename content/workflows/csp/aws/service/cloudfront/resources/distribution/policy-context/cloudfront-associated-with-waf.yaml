@@ -1,0 +1,32 @@
+schema: 1
+type: policy-context
+ 
+id: cloudfront-associated-with-waf
+name: CLOUDFRONT-ASSOCIATED-WITH-WAF
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudfront
+resource-type: distribution
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudfront-associated-with-waf
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudfront-associated-with-waf"))
+  - vendor: prisma-cloud
+    policies:
+      - a1152fef-3480-45bf-a7dd-eb4de3ed9943
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "a1152fef-3480-45bf-a7dd-eb4de3ed9943"
+risk-config:
+  default-risk: ""

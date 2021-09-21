@@ -16,7 +16,7 @@ Metadata:
 
 Parameters:
   CrossAccountRoleName:
-    Description: If this account is going receive alerts from other accounts i.e. this is a central security account, enter the name of the cross account role which exists in this account and has permissions to assume role into the accounts from which alerts are received. For more information visit  https://docs.dassana.io/docs/getting-started/aws-cross-account-role
+    Description: If this account is going receive alerts from other accounts i.e. this is a central security account, enter the name of the cross account role which exists in this account and has permissions to assume role into the accounts from which alerts are received. For more information visit https://docs.dassana.io/docs/getting-started/installation
     Type: String
     Default: ""
 
@@ -231,6 +231,7 @@ Resources:
                   - sqs:GetQueueAttributes
                 Resource:
                   - !GetAtt DassanaInboundQueue.Arn
+                  - !GetAtt DassanaOutboundQueue.Arn
                   - !GetAtt DassanaDeadLetterQueue.Arn
 
   DassanaInboundQueuePolicyForEventHub:

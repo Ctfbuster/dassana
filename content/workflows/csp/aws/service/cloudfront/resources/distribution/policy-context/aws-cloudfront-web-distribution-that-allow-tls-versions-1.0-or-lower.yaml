@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-cloudfront-web-distribution-that-allow-tls-versions-1.0-or-lower
+name: AWS CloudFront web distribution that allow TLS versions 1.0 or lower
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudfront
+resource-type: distribution
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 45e37556-3d26-4cdb-8780-5b7fc5f60e01
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "45e37556-3d26-4cdb-8780-5b7fc5f60e01"
+ 
+risk-config:
+  default-risk: medium

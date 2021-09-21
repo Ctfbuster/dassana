@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-rds-instance-not-in-private-subnet
+name: AWS RDS instance not in private subnet
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 7c41236b-3812-4065-bc2b-57d831fbb876
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "7c41236b-3812-4065-bc2b-57d831fbb876"
+ 
+risk-config:
+  default-risk: medium

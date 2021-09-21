@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: rds-cluster-deletion-protection-enabled
+name: RDS-CLUSTER-DELETION-PROTECTION-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: availability
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - rds-cluster-deletion-protection-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("rds-cluster-deletion-protection-enabled"))
+ 
+risk-config:
+  default-risk: low

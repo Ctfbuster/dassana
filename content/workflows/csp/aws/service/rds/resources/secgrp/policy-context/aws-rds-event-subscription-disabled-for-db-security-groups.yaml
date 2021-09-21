@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-rds-event-subscription-disabled-for-db-security-groups
+name: AWS RDS event subscription disabled for DB security groups
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: secgrp
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 2f33ac46-c909-4dca-8c0d-34fa2633865a
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "2f33ac46-c909-4dca-8c0d-34fa2633865a"
+ 
+risk-config:
+  default-risk: medium

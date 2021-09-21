@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sns-topic-policy-overly-permissive-for-publishing
+name: AWS SNS topic policy overly permissive for publishing
+labels:
+  - contextualization
+ 
+csp: aws
+service: sns
+resource-type: topic
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 15492dd6-455b-4487-a910-e3608b2ce9a2
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "15492dd6-455b-4487-a910-e3608b2ce9a2"
+ 
+risk-config:
+  default-risk: medium

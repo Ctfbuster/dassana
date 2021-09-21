@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: api-gw-execution-logging-enabled
+name: API-GW-EXECUTION-LOGGING-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: apiGateway
+resource-type: Stage
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - api-gw-execution-logging-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("api-gw-execution-logging-enabled"))
+ 
+risk-config:
+  default-risk: medium

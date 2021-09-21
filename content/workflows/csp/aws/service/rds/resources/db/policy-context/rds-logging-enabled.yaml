@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: rds-logging-enabled
+name: RDS-LOGGING-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: db
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - rds-logging-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("rds-logging-enabled"))
+ 
+risk-config:
+  default-risk: medium

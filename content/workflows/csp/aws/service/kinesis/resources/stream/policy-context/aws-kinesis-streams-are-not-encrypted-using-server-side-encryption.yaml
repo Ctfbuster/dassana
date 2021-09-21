@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-kinesis-streams-are-not-encrypted-using-server-side-encryption
+name: AWS Kinesis streams are not encrypted using Server Side Encryption
+labels:
+  - contextualization
+ 
+csp: aws
+service: kinesis
+resource-type: stream
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 8fd3611b-3298-483c-a1ec-0df3fc1ded8d
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "8fd3611b-3298-483c-a1ec-0df3fc1ded8d"
+ 
+risk-config:
+  default-risk: medium

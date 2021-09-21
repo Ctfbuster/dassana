@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: subnet-auto-assign-public-ip-disabled
+name: SUBNET-AUTO-ASSIGN-PUBLIC-IP-DISABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: subnet
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - subnet-auto-assign-public-ip-disabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("subnet-auto-assign-public-ip-disabled"))
+ 
+risk-config:
+  default-risk: medium

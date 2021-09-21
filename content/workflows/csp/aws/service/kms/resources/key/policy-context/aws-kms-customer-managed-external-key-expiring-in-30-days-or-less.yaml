@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-kms-customer-managed-external-key-expiring-in-30-days-or-less
+name: AWS KMS customer managed external key expiring in 30 days or less
+labels:
+  - contextualization
+ 
+csp: aws
+service: kms
+resource-type: key
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: key-management
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 0ee9e44a-bc0f-4eaa-9c1d-7fc4dedc7b39
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "0ee9e44a-bc0f-4eaa-9c1d-7fc4dedc7b39"
+ 
+risk-config:
+  default-risk: medium

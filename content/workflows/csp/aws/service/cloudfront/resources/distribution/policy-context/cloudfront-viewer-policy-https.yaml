@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: cloudfront-viewer-policy-https
+name: CLOUDFRONT-VIEWER-POLICY-HTTPS
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudfront
+resource-type: distribution
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudfront-viewer-policy-https
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudfront-viewer-policy-https"))
+ 
+risk-config:
+  default-risk: medium

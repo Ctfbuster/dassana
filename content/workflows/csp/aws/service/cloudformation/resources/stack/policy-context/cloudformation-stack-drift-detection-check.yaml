@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: cloudformation-stack-drift-detection-check
+name: CLOUDFORMATION-STACK-DRIFT-DETECTION-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudformation
+resource-type: stack
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudformation-stack-drift-detection-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and .vendorPolicy == "cloudformation-stack-drift-detection-check"
+ 
+risk-config:
+  default-risk: ""

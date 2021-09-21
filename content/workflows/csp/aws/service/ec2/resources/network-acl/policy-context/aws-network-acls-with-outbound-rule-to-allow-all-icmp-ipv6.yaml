@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-network-acls-with-outbound-rule-to-allow-all-icmp-ipv6
+name: AWS Network ACLs with Outbound rule to allow All ICMP IPv6
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: network-acl
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - e1db5e99-1c12-4834-995c-bec49960e9d7
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "e1db5e99-1c12-4834-995c-bec49960e9d7"
+ 
+risk-config:
+  default-risk: medium

@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: elasticsearch-encrypted-at-rest
+name: ELASTICSEARCH-ENCRYPTED-AT-REST
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticsearchService
+resource-type: domain
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - elasticsearch-encrypted-at-rest
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("elasticsearch-encrypted-at-rest"))
+  - vendor: prisma-cloud
+    policies:
+      - 0a54c279-d08a-4443-a93b-6d109addd964
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "0a54c279-d08a-4443-a93b-6d109addd964"
+ 
+risk-config:
+  default-risk: medium

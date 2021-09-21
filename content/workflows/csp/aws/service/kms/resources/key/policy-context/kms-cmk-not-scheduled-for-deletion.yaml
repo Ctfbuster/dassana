@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: kms-cmk-not-scheduled-for-deletion
+name: KMS-CMK-NOT-SCHEDULED-FOR-DELETION
+labels:
+  - contextualization
+ 
+csp: aws
+service: kms
+resource-type: key
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: key-management
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - kms-cmk-not-scheduled-for-deletion
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("kms-cmk-not-scheduled-for-deletion"))
+ 
+risk-config:
+  default-risk: critical

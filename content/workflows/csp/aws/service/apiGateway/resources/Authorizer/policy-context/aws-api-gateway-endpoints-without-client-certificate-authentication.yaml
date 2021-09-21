@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-api-gateway-endpoints-without-client-certificate-authentication
+name: AWS API Gateway endpoints without client certificate authentication
+labels:
+  - contextualization
+ 
+csp: aws
+service: apiGateway
+resource-type: Authorizer
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authentication
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 82493c0b-f4d0-4a82-a5b5-a85df8e78e19
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "82493c0b-f4d0-4a82-a5b5-a85df8e78e19"
+ 
+risk-config:
+  default-risk: medium

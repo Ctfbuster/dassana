@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: sagemaker-notebook-instance-kms-key-configured
+name: SAGEMAKER-NOTEBOOK-INSTANCE-KMS-KEY-CONFIGURED
+labels:
+  - contextualization
+ 
+csp: aws
+service: sagemaker
+resource-type: notebook-instance
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - sagemaker-notebook-instance-kms-key-configured
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("sagemaker-notebook-instance-kms-key-configured"))
+  - vendor: prisma-cloud
+    policies:
+      - f2c2c424-6fc9-4f99-8efb-4cb09810be97
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "f2c2c424-6fc9-4f99-8efb-4cb09810be97"
+ 
+risk-config:
+  default-risk: ""

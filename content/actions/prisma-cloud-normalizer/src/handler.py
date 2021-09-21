@@ -8,14 +8,6 @@ from pydantic.main import BaseModel
 from dassana.common.aws_client import parse_arn
 from dassana.common.models import NormalizedOutput
 
-
-class PrismaPolicy(BaseModel):
-    policyId: str
-    policyType: str
-    systemDefault: bool
-    remediable: bool
-
-
 class PrismaResourceData(BaseModel):
     arn: str = None
     tagSets: Dict[str, str] = {}
@@ -34,9 +26,10 @@ class PrismaResource(BaseModel):
 
 
 class PrismaAlert(BaseModel):
-    id: str
-    status: str
-    policy: PrismaPolicy
+    alertId: str
+    alertStatus: str
+    policyId: str
+    policyType: str
     resource: PrismaResource
 
 
@@ -55,9 +48,9 @@ def handle(event: PrismaAlert, context: LambdaContext):
 
     return loads(NormalizedOutput(
         vendorId='prisma-cloud',
-        alertId=event.id,
+        alertId=event.alertId,
         canonicalId=event.resource.data.arn,
-        vendorPolicy=event.policy.policyId,
+        vendorPolicy=event.policyId,
         csp=event.resource.cloudType,
         resourceContainer=event.resource.accountId,
         region=event.resource.regionId,

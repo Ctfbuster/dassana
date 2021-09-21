@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-log-metric-filter-and-alarm-does-not-exist-for-vpc-changes
+name: AWS Log metric filter and alarm does not exist for VPC changes
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - f65a0c46-8119-4585-bb28-fd3d5c80cef5
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "f65a0c46-8119-4585-bb28-fd3d5c80cef5"
+ 
+risk-config:
+  default-risk: low

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: dynamodb-table-encryption-enabled
+name: DYNAMODB-TABLE-ENCRYPTION-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: dynamodb
+resource-type: table
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - dynamodb-table-encryption-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("dynamodb-table-encryption-enabled"))
+ 
+risk-config:
+  default-risk: ""

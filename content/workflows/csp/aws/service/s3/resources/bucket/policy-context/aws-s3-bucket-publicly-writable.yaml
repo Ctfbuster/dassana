@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-s3-bucket-publicly-writable
+name: AWS S3 bucket publicly writable
+labels:
+  - contextualization
+ 
+csp: aws
+service: s3
+resource-type: bucket
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: public-access
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 55b4de5f-2b59-4545-ac0c-f4ebad2e3add
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "55b4de5f-2b59-4545-ac0c-f4ebad2e3add"
+ 
+risk-config:
+  default-risk: high

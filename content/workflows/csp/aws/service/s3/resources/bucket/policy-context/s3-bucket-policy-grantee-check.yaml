@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: s3-bucket-policy-grantee-check
+name: S3-BUCKET-POLICY-GRANTEE-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: s3
+resource-type: bucket
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - s3-bucket-policy-grantee-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-policy-grantee-check"))
+ 
+risk-config:
+  default-risk: ""

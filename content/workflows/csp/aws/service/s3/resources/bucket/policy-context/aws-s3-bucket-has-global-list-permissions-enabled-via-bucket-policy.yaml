@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-s3-bucket-has-global-list-permissions-enabled-via-bucket-policy
+name: AWS S3 Bucket has Global LIST Permissions enabled via bucket policy
+labels:
+  - contextualization
+ 
+csp: aws
+service: s3
+resource-type: bucket
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - de67bb9a-f776-4ff3-a27f-c1560cb563ce
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "de67bb9a-f776-4ff3-a27f-c1560cb563ce"
+ 
+risk-config:
+  default-risk: medium

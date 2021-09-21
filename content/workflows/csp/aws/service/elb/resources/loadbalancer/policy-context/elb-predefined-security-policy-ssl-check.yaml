@@ -1,0 +1,35 @@
+schema: 1
+type: policy-context
+ 
+id: elb-predefined-security-policy-ssl-check
+name: ELB-PREDEFINED-SECURITY-POLICY-SSL-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: elb
+resource-type: loadbalancer
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - elb-predefined-security-policy-ssl-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("elb-predefined-security-policy-ssl-check"))
+  - vendor: prisma-cloud
+    policies:
+      - ac5232af-7c3c-4134-866c-988757ce16d7
+      - cc5a49ce-509c-4779-bb00-e1fc6fc6b10c
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "ac5232af-7c3c-4134-866c-988757ce16d7"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "cc5a49ce-509c-4779-bb00-e1fc6fc6b10c"
+ 
+risk-config:
+  default-risk: ""

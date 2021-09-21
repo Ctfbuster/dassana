@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-classic-load-balancer-is-in-use-for-internet-facing-applications
+name: AWS Classic Load Balancer is in use for internet-facing applications
+labels:
+  - contextualization
+ 
+csp: aws
+service: elb
+resource-type: loadbalancer
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: hygiene
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 72859f28-0817-43d2-b249-1a9350e5aa89
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "72859f28-0817-43d2-b249-1a9350e5aa89"
+ 
+risk-config:
+  default-risk: low

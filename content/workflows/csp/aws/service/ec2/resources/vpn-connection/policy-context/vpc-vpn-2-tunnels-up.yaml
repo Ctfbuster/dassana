@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: vpc-vpn-2-tunnels-up
+name: VPC-VPN-2-TUNNELS-UP
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: vpn-connection
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - vpc-vpn-2-tunnels-up
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("vpc-vpn-2-tunnels-up"))
+ 
+risk-config:
+  default-risk: ""

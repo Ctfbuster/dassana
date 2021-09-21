@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: iam-inline-policy-blocked-kms-actions
+name: IAM-INLINE-POLICY-BLOCKED-KMS-ACTIONS
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: policy
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - iam-inline-policy-blocked-kms-actions
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("iam-inline-policy-blocked-kms-actions"))
+ 
+risk-config:
+  default-risk: medium

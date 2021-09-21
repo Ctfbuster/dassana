@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+
+id: ebs-snapshot-is-not-encrypted
+name: EBS snapshot is not encrypted
+labels:
+  - contextualization
+
+csp: aws
+service: ec2
+resource-type: snapshot
+
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+
+filters:
+  - vendor: aws-config
+    policies:
+      - "ec2-ebs-encryption-by-default"
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("ec2-ebs-encryption-by-default"))
+  - vendor: prisma-cloud
+    policies:
+      - "0255f382-9a40-4ab6-b62b-d42d7d89d301"
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "0255f382-9a40-4ab6-b62b-d42d7d89d301"
+
+risk-config:
+  default-risk: low

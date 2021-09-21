@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-amazon-machine-image-(ami)-is-publicly-accessible
+name: AWS Amazon Machine Image (AMI) is publicly accessible
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: image
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: public-access
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 81a2200a-c63e-4860-85a0-b54eaa581135
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "81a2200a-c63e-4860-85a0-b54eaa581135"
+ 
+risk-config:
+  default-risk: high

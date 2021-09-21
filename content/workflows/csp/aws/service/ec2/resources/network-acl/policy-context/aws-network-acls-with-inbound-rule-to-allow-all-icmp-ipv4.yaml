@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-network-acls-with-inbound-rule-to-allow-all-icmp-ipv4
+name: AWS Network ACLs with Inbound rule to allow All ICMP IPv4
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: network-acl
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 0dda2afe-82df-4ba5-9664-a5ba23da9754
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "0dda2afe-82df-4ba5-9664-a5ba23da9754"
+ 
+risk-config:
+  default-risk: medium

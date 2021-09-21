@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: lambda-function-public-access-prohibited
+name: LAMBDA-FUNCTION-PUBLIC-ACCESS-PROHIBITED
+labels:
+  - contextualization
+ 
+csp: aws
+service: lambda
+resource-type: function
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: public-access
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - lambda-function-public-access-prohibited
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("lambda-function-public-access-prohibited"))
+ 
+risk-config:
+  default-risk: critical

@@ -105,6 +105,12 @@ html[data-theme='dark'] .alert--warning {
 	border-color: var(--oranges-base);
 }
 
+/* ------ Code editor ------ */
+
+.prism-code .token.operator {
+	background: none;
+}
+
 /* ------ Breakpoints ------ */
 
 @value mobile-breakpoint: 480px;

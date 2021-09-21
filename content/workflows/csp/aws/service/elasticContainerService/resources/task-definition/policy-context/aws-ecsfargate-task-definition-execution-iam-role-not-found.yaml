@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ecs/fargate-task-definition-execution-iam-role-not-found
+name: AWS ECS/Fargate task definition execution IAM Role not found
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticContainerService
+resource-type: task-definition
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - b17e95d3-901c-4aec-aefd-bcd52b10089d
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "b17e95d3-901c-4aec-aefd-bcd52b10089d"
+ 
+risk-config:
+  default-risk: medium

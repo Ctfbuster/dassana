@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: redshift-enhanced-vpc-routing-enabled
+name: REDSHIFT-ENHANCED-VPC-ROUTING-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: redshift
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - redshift-enhanced-vpc-routing-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("redshift-enhanced-vpc-routing-enabled"))
+ 
+risk-config:
+  default-risk: high

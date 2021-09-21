@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-elastic-load-balancer-(classic)-with-connection-draining-disabled
+name: AWS Elastic Load Balancer (Classic) with connection draining disabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: elb
+resource-type: loadbalancer
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: availability
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 7eb7f61e-df59-42d4-8236-7d012f278fa6
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "7eb7f61e-df59-42d4-8236-7d012f278fa6"
+ 
+risk-config:
+  default-risk: high

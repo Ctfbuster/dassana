@@ -1,0 +1,32 @@
+schema: 1
+type: policy-context
+ 
+id: cloudfront-custom-ssl-certificate
+name: CLOUDFRONT-CUSTOM-SSL-CERTIFICATE
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudfront
+resource-type: distribution
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: certificate-management
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudfront-custom-ssl-certificate
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudfront-custom-ssl-certificate"))
+  - vendor: prisma-cloud
+    policies:
+      - a072bd68-25cd-4245-94e1-fffee0590a50
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "a072bd68-25cd-4245-94e1-fffee0590a50"
+risk-config:
+  default-risk: ""

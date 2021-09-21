@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-iam-policy-allows-assume-role-permission-across-all-services
+name: AWS IAM policy allows assume role permission across all services
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: policy
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 625b4ce5-b8f1-4bdb-8959-7de645095e2b
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "625b4ce5-b8f1-4bdb-8959-7de645095e2b"
+ 
+risk-config:
+  default-risk: high

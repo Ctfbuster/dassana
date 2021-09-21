@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-iam-has-expired-ssl/tls-certificates
+name: AWS IAM has expired SSL/TLS certificates
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: server-certificate
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: certificate-management
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 5a63ca23-75be-4fb7-9b52-c5392dce1553
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "5a63ca23-75be-4fb7-9b52-c5392dce1553"
+ 
+risk-config:
+  default-risk: medium

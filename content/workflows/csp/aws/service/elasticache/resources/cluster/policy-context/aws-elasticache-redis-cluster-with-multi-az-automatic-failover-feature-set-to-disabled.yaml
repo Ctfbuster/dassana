@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-elasticache-redis-cluster-with-multi-az-automatic-failover-feature-set-to-disabled
+name: AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticache
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: availability
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 99f6fc8c-27a7-4f30-84ef-9a2388e8e938
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "99f6fc8c-27a7-4f30-84ef-9a2388e8e938"
+ 
+risk-config:
+  default-risk: medium

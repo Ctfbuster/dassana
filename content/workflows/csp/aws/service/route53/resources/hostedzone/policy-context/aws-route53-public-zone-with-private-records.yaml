@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-route53-public-zone-with-private-records
+name: AWS Route53 Public Zone with Private Records
+labels:
+  - contextualization
+ 
+csp: aws
+service: route53
+resource-type: hostedzone
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: hygiene
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 9a2dfca7-7d32-4007-b249-c1efd6dee74b
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "9a2dfca7-7d32-4007-b249-c1efd6dee74b"
+ 
+risk-config:
+  default-risk: medium

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: lambda-function-settings-check
+name: LAMBDA-FUNCTION-SETTINGS-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: lambda
+resource-type: function
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - lambda-function-settings-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("lambda-function-settings-check"))
+ 
+risk-config:
+  default-risk: medium

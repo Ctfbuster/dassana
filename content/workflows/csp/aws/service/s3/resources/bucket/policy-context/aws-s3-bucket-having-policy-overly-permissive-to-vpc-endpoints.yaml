@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-s3-bucket-having-policy-overly-permissive-to-vpc-endpoints
+name: AWS S3 bucket having policy overly permissive to VPC endpoints
+labels:
+  - contextualization
+ 
+csp: aws
+service: s3
+resource-type: bucket
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 6d783c42-98e1-4d0a-a521-1286535f05a4
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "6d783c42-98e1-4d0a-a521-1286535f05a4"
+ 
+risk-config:
+  default-risk: medium

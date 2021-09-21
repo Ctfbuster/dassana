@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ebs-volume-is-unattached
+name: AWS EBS Volume is unattached
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: volume
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: hygiene
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - cc911950-a215-4dfb-ba84-0481c36c74c8
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "cc911950-a215-4dfb-ba84-0481c36c74c8"
+ 
+risk-config:
+  default-risk: low

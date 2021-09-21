@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: ec2-managedinstance-patch-compliance-status-check
+name: EC2-MANAGEDINSTANCE-PATCH-COMPLIANCE-STATUS-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: instance
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - ec2-managedinstance-patch-compliance-status-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("ec2-managedinstance-patch-compliance-status-check"))
+ 
+risk-config:
+  default-risk: high

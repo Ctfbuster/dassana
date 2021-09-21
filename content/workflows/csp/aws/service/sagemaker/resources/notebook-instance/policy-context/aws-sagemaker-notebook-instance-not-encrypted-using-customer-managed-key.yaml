@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sagemaker-notebook-instance-not-encrypted-using-customer-managed-key
+name: AWS SageMaker notebook instance not encrypted using Customer Managed Key
+labels:
+  - contextualization
+ 
+csp: aws
+service: sagemaker
+resource-type: notebook-instance
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - cf7274bc-24ec-443a-8d2e-01835a27f879
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "cf7274bc-24ec-443a-8d2e-01835a27f879"
+ 
+risk-config:
+  default-risk: medium

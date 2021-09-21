@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: fms-security-group-resource-association-check
+name: FMS-SECURITY-GROUP-RESOURCE-ASSOCIATION-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: security-group
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - fms-security-group-resource-association-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("fms-security-group-resource-association-check"))
+ 
+risk-config:
+  default-risk: ""

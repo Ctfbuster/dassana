@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aurora-mysql-backtracking-enabled
+name: AURORA-MYSQL-BACKTRACKING-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: availability
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - aurora-mysql-backtracking-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("aurora-mysql-backtracking-enabled"))
+ 
+risk-config:
+  default-risk: medium

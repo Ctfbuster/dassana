@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-vpc-nacl-allows-egress-traffic-from-blocked-ports
+name: AWS VPC NACL allows egress traffic from blocked ports
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: network-acl
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - f3542ecc-6d34-4797-9b0f-d773d46b50a7
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "f3542ecc-6d34-4797-9b0f-d773d46b50a7"
+ 
+risk-config:
+  default-risk: medium

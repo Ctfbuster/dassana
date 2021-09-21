@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-emr-cluster-is-not-configured-with-security-configuration
+name: AWS EMR cluster is not configured with security configuration
+labels:
+  - contextualization
+ 
+csp: aws
+service: emr
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - fdb20dde-b829-4385-b6b8-eb29f6379e8c
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "fdb20dde-b829-4385-b6b8-eb29f6379e8c"
+ 
+risk-config:
+  default-risk: medium

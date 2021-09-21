@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sns-topic-is-exposed-to-unauthorized-access
+name: AWS SNS topic is exposed to unauthorized access
+labels:
+  - contextualization
+ 
+csp: aws
+service: sns
+resource-type: topic
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 8cad8d21-a1ad-47a2-a014-3290afca1c12
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "8cad8d21-a1ad-47a2-a014-3290afca1c12"
+ 
+risk-config:
+  default-risk: high

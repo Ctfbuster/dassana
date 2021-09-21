@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-cloudtrail-logging-is-disabled
+name: AWS CloudTrail logging is disabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudtrail
+resource-type: trail
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 626b8868-1da0-4293-a75b-e599ee73c955
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "626b8868-1da0-4293-a75b-e599ee73c955"
+ 
+risk-config:
+  default-risk: medium

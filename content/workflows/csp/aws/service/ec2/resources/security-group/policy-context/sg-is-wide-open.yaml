@@ -21,12 +21,14 @@ filters:
       - restricted-ssh
       - restricted-common-ports
       - vpc-default-security-group-closed
+      - vpc-sg-open-only-to-authorized-ports
     match-type: any
     rules:
       # here normalizerId refers to the normalizer normalizerId which normalized the alert
       - .vendorId == "aws-config" and (.vendorPolicy |contains ("restricted-ssh") )
       - .vendorId == "aws-config" and (.vendorPolicy |contains ("restricted-common-ports"))
       - .vendorId == "aws-config" and (.vendorPolicy |contains ("vpc-default-security-group-closed"))
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("vpc-sg-open-only-to-authorized-ports"))
   - vendor: prisma-cloud
     policies:
       - "617b9138-584b-4e8e-ad15-7fbabafbed1a"

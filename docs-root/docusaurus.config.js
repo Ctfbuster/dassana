@@ -19,6 +19,9 @@ module.exports = {
 		}
 	],
 	themeConfig: {
+		prism: {
+			theme: require('prism-react-renderer/themes/nightOwl')
+		},
 		colorMode: {
 			defaultMode: 'dark',
 			disableSwitch: true

@@ -1,0 +1,104 @@
+# Policy
+
+When creating or modifying a `policy-context` workflow the following fields must be defined:
+
+-   `class`: High level classification of a security issue. Either risk or incident.
+-   `subclass`: Sub classification of a security issue. For example, for the risk class one of the valid subclasses is config representing misconfiguration issues.
+-   `category`: Categories go another level deeper in classifying issues. For example, under config some of the valid categories are networking, cryptography, visibility, etc.
+-   `subcategory`: Final level in classifying issues. For example, under the cryptography category some of the valid subcategories are encryption and ssl.
+
+## Valid Mapping Example
+
+```yaml
+class: risk
+subclass: config
+category: cryptography
+subcategory: encryption
+```
+
+## Policy Classification File
+
+The following file showcases the available fields. [View full file on GitHub](https://github.com/dassana-io/dassana/blob/main/content/schemas/policy-classification/policy-classification.yaml).
+
+```yaml title="content/schemas/policy-classification/policy-classification.yaml"
+classes:
+    - id: risk
+      subclasses:
+          - id: config
+            categories:
+                - id: networking
+                  subcategories:
+                      - id: firewall
+                      - id: encryption
+                      - id: availability
+                - id: storage
+                  subcategories:
+                      - id: encryption
+                      - id: availability
+                - id: visibility
+                  subcategories:
+                      - id: hygiene
+                      - id: logging
+                      - id: monitoring
+                - id: iam
+                  subcategories:
+                      - id: authentication
+                      - id: authorization
+                      - id: public-access
+                - id: crypto
+                  subcategories:
+                      - id: key-management
+                      - id: certificate-management
+                      - id: secret-management
+                - id: uncategorized
+                  subcategories:
+                      - id: best-practice
+    - id: incident
+      subclasses:
+          - id: reconnaissance
+            categories:
+                - id: active-scanning
+          - id: initial-access
+            categories:
+                - id: drive-by-compromise
+                - id: phishing
+                - id: exploit-public-facing-application
+                - id: valid-accounts
+          - id: persistence
+            categories:
+                - id: account-manipulation
+          - id: privelege-escalation
+            categories:
+                - id: valid-accounts
+          - id: defense-evasion
+            categories:
+                - id: impair-defenses
+          - id: credential-access
+            categories:
+                - id: brute-force
+                - id: unsecured-credentials
+          - id: discovery
+            categories:
+                - id: network-service-scanning
+                - id: cloud-infrastructure-discovery
+                - id: cloud-service-discovery
+          - id: collection
+            categories:
+                - id: data-from-cloud-storage-object
+          - id: command-and-control
+            categories:
+                - id: application-layer-protocol
+                - id: non-standard-port
+                - id: dynamic-resolution
+                - id: proxy
+          - id: exfiltration
+            categories:
+                - id: automated-exfiltration
+                - id: exfiltration-over-alternative-protocol
+                - id: exfiltration-over-web-service
+          - id: impact
+            categories:
+                - id: network-denial-of-service
+                - id: resource-hijacking
+                - id: data-destruction
+```

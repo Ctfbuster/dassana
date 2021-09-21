@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: efs-encrypted-check
+name: EFS-ENCRYPTED-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: efs
+resource-type: file-system
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - efs-encrypted-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("efs-encrypted-check"))
+  - vendor: prisma-cloud
+    policies:
+      - f7757a77-2c4f-4644-a890-d23122b31175
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "f7757a77-2c4f-4644-a890-d23122b31175"
+ 
+risk-config:
+  default-risk: medium

@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: redshift-require-tls-ssl
+name: REDSHIFT-REQUIRE-TLS-SSL
+labels:
+  - contextualization
+ 
+csp: aws
+service: redshift
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - redshift-require-tls-ssl
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("redshift-require-tls-ssl"))
+  - vendor: prisma-cloud
+    policies:
+      - 7446ad28-8502-4d71-b334-18cef8d85a2b
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "7446ad28-8502-4d71-b334-18cef8d85a2b"
+ 
+risk-config:
+  default-risk: medium

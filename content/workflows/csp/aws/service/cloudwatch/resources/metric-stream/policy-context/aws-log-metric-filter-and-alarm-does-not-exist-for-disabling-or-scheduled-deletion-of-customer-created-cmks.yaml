@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-log-metric-filter-and-alarm-does-not-exist-for-disabling-or-scheduled-deletion-of-customer-created-cmks
+name: AWS Log metric filter and alarm does not exist for disabling or scheduled deletion of customer created CMKs
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 6b36bc00-40f4-4b33-b602-d6b4bad628c9
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "6b36bc00-40f4-4b33-b602-d6b4bad628c9"
+ 
+risk-config:
+  default-risk: low

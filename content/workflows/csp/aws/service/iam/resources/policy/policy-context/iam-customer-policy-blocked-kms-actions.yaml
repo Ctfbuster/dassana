@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: iam-customer-policy-blocked-kms-actions
+name: IAM-CUSTOMER-POLICY-BLOCKED-KMS-ACTIONS
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: policy
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - iam-customer-policy-blocked-kms-actions
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("iam-customer-policy-blocked-kms-actions"))
+  - vendor: prisma-cloud
+    policies:
+      - 1eb7db29-9561-418e-a038-1344c3c79014
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "1eb7db29-9561-418e-a038-1344c3c79014"
+ 
+risk-config:
+  default-risk: medium

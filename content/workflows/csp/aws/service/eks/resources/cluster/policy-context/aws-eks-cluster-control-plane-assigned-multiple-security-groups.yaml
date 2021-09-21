@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-eks-cluster-control-plane-assigned-multiple-security-groups
+name: AWS EKS cluster control plane assigned multiple security groups
+labels:
+  - contextualization
+ 
+csp: aws
+service: eks
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 0fb6d35d-224f-4854-a279-8840068569a0
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "0fb6d35d-224f-4854-a279-8840068569a0"
+ 
+risk-config:
+  default-risk: low

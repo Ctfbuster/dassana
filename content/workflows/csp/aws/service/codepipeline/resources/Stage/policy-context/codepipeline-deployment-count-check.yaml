@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: codepipeline-deployment-count-check
+name: CODEPIPELINE-DEPLOYMENT-COUNT-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: codepipeline
+resource-type: stage
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - codepipeline-deployment-count-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("codepipeline-deployment-count-check"))
+ 
+risk-config:
+  default-risk: ""

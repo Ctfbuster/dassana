@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-eks-cluster-security-group-overly-permissive-to-all-traffic
+name: AWS EKS cluster security group overly permissive to all traffic
+labels:
+  - contextualization
+ 
+csp: aws
+service: eks
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 5cc78081-1006-4874-8b13-bd01583888c4
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "5cc78081-1006-4874-8b13-bd01583888c4"
+ 
+risk-config:
+  default-risk: medium

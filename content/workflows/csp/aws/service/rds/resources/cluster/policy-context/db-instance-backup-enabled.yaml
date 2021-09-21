@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: db-instance-backup-enabled
+name: DB-INSTANCE-BACKUP-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: availability
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - db-instance-backup-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("db-instance-backup-enabled"))
+  - vendor: prisma-cloud
+    policies:
+      - 3a6797a0-2420-4b27-b06b-9eec275c233f
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "3a6797a0-2420-4b27-b06b-9eec275c233f"
+ 
+risk-config:
+  default-risk: ""

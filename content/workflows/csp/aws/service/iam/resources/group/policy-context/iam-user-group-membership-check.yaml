@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: iam-user-group-membership-check
+name: IAM-USER-GROUP-MEMBERSHIP-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: group
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authentication
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - iam-user-group-membership-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("iam-user-group-membership-check"))
+ 
+risk-config:
+  default-risk: ""

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-glue-connection-do-not-have-ssl-configured
+name: AWS Glue connection do not have SSL configured
+labels:
+  - contextualization
+ 
+csp: aws
+service: glue
+resource-type: connection
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 47a93d3d-1a0e-4487-97d9-c602338c607c
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "47a93d3d-1a0e-4487-97d9-c602338c607c"
+ 
+risk-config:
+  default-risk: medium

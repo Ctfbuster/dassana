@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-rds-db-cluster-encryption-is-disabled
+name: AWS RDS DB cluster encryption is disabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: rds
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - dae26f3c-d05a-4499-bdcd-fc5c32e3891f
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "dae26f3c-d05a-4499-bdcd-fc5c32e3891f"
+ 
+risk-config:
+  default-risk: medium

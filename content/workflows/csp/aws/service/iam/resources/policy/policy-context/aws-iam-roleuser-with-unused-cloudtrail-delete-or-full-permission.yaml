@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-iam-role/user-with-unused-cloudtrail-delete-or-full-permission
+name: AWS IAM role/user with unused CloudTrail delete or full permission
+labels:
+  - contextualization
+ 
+csp: aws
+service: iam
+resource-type: policy
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 08f84034-fb56-4eb4-914f-bf1358d0d870
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "08f84034-fb56-4eb4-914f-bf1358d0d870"
+ 
+risk-config:
+  default-risk: low

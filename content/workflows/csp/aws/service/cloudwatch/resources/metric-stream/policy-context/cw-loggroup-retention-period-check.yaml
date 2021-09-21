@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: cw-loggroup-retention-period-check
+name: CW-LOGGROUP-RETENTION-PERIOD-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudwatch
+resource-type: metric-stream
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cw-loggroup-retention-period-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cw-loggroup-retention-period-check"))
+ 
+risk-config:
+  default-risk: ""

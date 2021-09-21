@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ecs-cluster-not-configured-with-active-services
+name: AWS ECS cluster not configured with active services
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticContainerService
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: hygiene
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - a8b1af9e-53b3-4b43-91e0-482730ca5ab5
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "a8b1af9e-53b3-4b43-91e0-482730ca5ab5"
+ 
+risk-config:
+  default-risk: low

@@ -1,0 +1,32 @@
+schema: 1
+type: policy-context
+ 
+id: eip-attached
+name: EIP-ATTACHED
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: elastic-ip
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: hygiene
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - eip-attached
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("eip-attached"))
+  - vendor: prisma-cloud
+    policies:
+      - fae6c539-55ef-4cfd-a021-d939e8235116
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "fae6c539-55ef-4cfd-a021-d939e8235116"
+risk-config:
+  default-risk: ""

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ecs-task-definition-resource-limits-not-set
+name: AWS ECS task definition resource limits not set
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticContainerService
+resource-type: task-definition
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - e9c55485-e508-4783-abdd-d06c61c32431
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "e9c55485-e508-4783-abdd-d06c61c32431"
+ 
+risk-config:
+  default-risk: high

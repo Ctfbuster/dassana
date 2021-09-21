@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-kinesis-streams-encryption-using-default-kms-keys-instead-of-customer's-managed-master-keys
+name: AWS Kinesis streams encryption using default KMS keys instead of Customer's Managed Master Keys
+labels:
+  - contextualization
+ 
+csp: aws
+service: kinesis
+resource-type: stream
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: key-management
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 5c537bb1-64f1-4e56-925e-7f0538800ff0
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "5c537bb1-64f1-4e56-925e-7f0538800ff0"
+ 
+risk-config:
+  default-risk: medium

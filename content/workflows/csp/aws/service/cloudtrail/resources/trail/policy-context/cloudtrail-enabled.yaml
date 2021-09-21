@@ -1,0 +1,32 @@
+schema: 1
+type: policy-context
+ 
+id: cloudtrail-enabled
+name: CLOUDTRAIL-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudtrail
+resource-type: trail
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - cloudtrail-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("cloudtrail-enabled"))
+  - vendor: prisma-cloud
+    policies:
+      - 05befc8b-c78a-45e9-98dc-c7fbaef580e7
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "05befc8b-c78a-45e9-98dc-c7fbaef580e7"
+risk-config:
+  default-risk: ""

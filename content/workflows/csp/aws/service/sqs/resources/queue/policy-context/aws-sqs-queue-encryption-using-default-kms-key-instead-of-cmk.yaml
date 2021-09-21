@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sqs-queue-encryption-using-default-kms-key-instead-of-cmk
+name: AWS SQS queue encryption using default KMS key instead of CMK
+labels:
+  - contextualization
+ 
+csp: aws
+service: sqs
+resource-type: queue
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: key-management
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 45f307ff-288c-4f87-92ec-bee6d0318b27
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "45f307ff-288c-4f87-92ec-bee6d0318b27"
+ 
+risk-config:
+  default-risk: medium

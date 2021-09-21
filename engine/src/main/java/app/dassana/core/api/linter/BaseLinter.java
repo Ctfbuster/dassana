@@ -12,8 +12,8 @@ import java.util.Set;
 
 public abstract class BaseLinter {
 
-	private final static String resourceLink =  "https://docs.dassana.io/docs/guides/workflow-authoring/resource-context#csp-service--resource-type";
-	private final static String policyLink   =  "https://docs.dassana.io/docs/guides/workflow-authoring/policy-context#class-subclass-category--subcategory";
+	private final static String resourceLink =  "https://docs.dassana.io/docs/guides/classification/resource-hierarchy";
+	private final static String policyLink   =  "https://docs.dassana.io/docs/guides/classification/policy";
 	protected String content = Thread.currentThread().getContextClassLoader().getResource("content").getFile();
 
 	protected ContextValidator validator = new ContextValidator();

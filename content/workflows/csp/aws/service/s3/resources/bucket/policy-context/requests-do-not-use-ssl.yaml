@@ -12,8 +12,8 @@ resource-type: bucket
 
 class: risk
 subclass: config
-category: cryptography
-subcategory: ssl
+category: networking
+subcategory: encryption
 
 filters:
   - vendor: aws-config

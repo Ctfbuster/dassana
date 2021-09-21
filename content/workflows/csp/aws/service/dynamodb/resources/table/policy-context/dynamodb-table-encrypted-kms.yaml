@@ -1,0 +1,33 @@
+schema: 1
+type: policy-context
+ 
+id: dynamodb-table-encrypted-kms
+name: DYNAMODB-TABLE-ENCRYPTED-KMS
+labels:
+  - contextualization
+ 
+csp: aws
+service: dynamodb
+resource-type: table
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: key-management
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - dynamodb-table-encrypted-kms
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("dynamodb-table-encrypted-kms"))
+  - vendor: prisma-cloud
+    policies:
+      - e1322a56-1172-4034-a793-300c062b66d2
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "e1322a56-1172-4034-a793-300c062b66d2"
+ 
+risk-config:
+  default-risk: ""

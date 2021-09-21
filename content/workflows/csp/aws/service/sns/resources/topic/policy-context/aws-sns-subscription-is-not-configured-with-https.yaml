@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sns-subscription-is-not-configured-with-https
+name: AWS SNS subscription is not configured with HTTPS
+labels:
+  - contextualization
+ 
+csp: aws
+service: sns
+resource-type: topic
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 36e64e59-6f9f-47b7-a8ce-889a037d0ea7
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "36e64e59-6f9f-47b7-a8ce-889a037d0ea7"
+ 
+risk-config:
+  default-risk: medium

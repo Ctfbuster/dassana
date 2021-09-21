@@ -50,7 +50,12 @@ public class SqsHandler extends MicronautRequestHandler<SQSEvent, Void> {
         ProcessingResponse processingResponse = requestProcessor.processRequest(request);
         NormalizerWorkflow normalizerWorkflow = processingResponse.getNormalizerWorkflow();
 
-        if (normalizerWorkflow != null && normalizerWorkflow.isOutputQueueEnabled() && request.isQueueProcessing()) {
+        if(normalizerWorkflow==null){
+          sqsClient.sendMessage(SendMessageRequest.builder().
+              queueUrl(dassanaOutboundQueue).
+              messageBody(processingResponse.getDecoratedJson()).build());
+
+        }else if (normalizerWorkflow.isOutputQueueEnabled() && request.isQueueProcessing()) {
           sqsClient.sendMessage(SendMessageRequest.builder().
               queueUrl(dassanaOutboundQueue).
               messageBody(processingResponse.getDecoratedJson()).build());

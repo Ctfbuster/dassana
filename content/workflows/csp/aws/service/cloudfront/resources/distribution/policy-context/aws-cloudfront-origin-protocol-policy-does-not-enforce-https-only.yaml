@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-cloudfront-origin-protocol-policy-does-not-enforce-https-only
+name: AWS CloudFront origin protocol policy does not enforce HTTPS-only
+labels:
+  - contextualization
+ 
+csp: aws
+service: cloudfront
+resource-type: distribution
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 366ac171-3066-46d3-a32f-df80b0a9fe56
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "366ac171-3066-46d3-a32f-df80b0a9fe56"
+ 
+risk-config:
+  default-risk: high

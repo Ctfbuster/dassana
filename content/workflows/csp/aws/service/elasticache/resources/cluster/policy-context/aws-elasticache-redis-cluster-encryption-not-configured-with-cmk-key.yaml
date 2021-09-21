@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-elasticache-redis-cluster-encryption-not-configured-with-cmk-key
+name: AWS ElastiCache Redis cluster encryption not configured with CMK key
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticache
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 7581633b-0db1-4181-83c5-7fcc0347729d
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "7581633b-0db1-4181-83c5-7fcc0347729d"
+ 
+risk-config:
+  default-risk: medium

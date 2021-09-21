@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: securityhub-enabled
+name: SECURITYHUB-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: securityhub
+resource-type: hub
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: monitoring
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - securityhub-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("securityhub-enabled"))
+ 
+risk-config:
+  default-risk: ""

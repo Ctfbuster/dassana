@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-certificate-manager-(acm)-has-certificates-with-certificate-transparency-logging-disabled
+name: AWS Certificate Manager (ACM) has certificates with Certificate Transparency Logging disabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: certificateManager
+resource-type: certificate
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 546a493a-3979-42d1-a018-e07dbfc15ae6
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "546a493a-3979-42d1-a018-e07dbfc15ae6"
+ 
+risk-config:
+  default-risk: medium

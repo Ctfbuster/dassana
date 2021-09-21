@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: fms-webacl-resource-policy-check
+name: FMS-WEBACL-RESOURCE-POLICY-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: firewallManager
+resource-type: policy
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - fms-webacl-resource-policy-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("fms-webacl-resource-policy-check"))
+ 
+risk-config:
+  default-risk: ""

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sagemaker-notebook-instance-is-not-placed-in-vpc
+name: AWS SageMaker notebook instance is not placed in VPC
+labels:
+  - contextualization
+ 
+csp: aws
+service: sagemaker
+resource-type: notebook-instance
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 4af86954-7e52-46d6-bf4a-efa0c4ccee41
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "4af86954-7e52-46d6-bf4a-efa0c4ccee41"
+ 
+risk-config:
+  default-risk: medium

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-kms-customer-managed-key-not-in-use
+name: AWS KMS Customer Managed Key not in use
+labels:
+  - contextualization
+ 
+csp: aws
+service: kms
+resource-type: key
+ 
+class: risk
+subclass: config
+category: crypto
+subcategory: key-management
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 40edb7ed-948e-4204-a3bb-9597b3e673f2
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "40edb7ed-948e-4204-a3bb-9597b3e673f2"
+ 
+risk-config:
+  default-risk: medium

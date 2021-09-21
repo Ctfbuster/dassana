@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: dynamodb-autoscaling-enabled
+name: DYNAMODB-AUTOSCALING-ENABLED
+labels:
+  - contextualization
+ 
+csp: aws
+service: dynamodb
+resource-type: table
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: availability
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - dynamodb-autoscaling-enabled
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("dynamodb-autoscaling-enabled"))
+ 
+risk-config:
+  default-risk: medium

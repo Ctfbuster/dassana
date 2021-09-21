@@ -2,7 +2,7 @@ schema: 1
 type: policy-context
 
 id: ebs-volume-is-not-encrypted
-name: EBS snapshot is public
+name: EBS volume is not encrypted
 labels:
   - contextualization
 
@@ -12,24 +12,22 @@ resource-type: volume
 
 class: risk
 subclass: config
-category: cryptography
+category: storage
 subcategory: encryption
 
 filters:
   - vendor: aws-config
     policies:
-      - "ec2-ebs-encryption-by-default"
       - "encrypted-volumes"
     match-type: any
     rules:
-      - .vendorId == "aws-config" and (.vendorPolicy |contains ("ec2-ebs-encryption-by-default"))
       - .vendorId == "aws-config" and (.vendorPolicy |contains ("encrypted-volumes"))
   - vendor: prisma-cloud
     policies:
-      - "7c714cb4-3d47-4c32-98d4-c13f92ce4ec5"
+      - 6960be11-e3a6-46cc-bf66-933c57c2af5d
     match-type: any
     rules:
-      - .vendorId == "prisma-cloud" and .vendorPolicy == "7c714cb4-3d47-4c32-98d4-c13f92ce4ec5"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "6960be11-e3a6-46cc-bf66-933c57c2af5d"
 
 risk-config:
   default-risk: medium

@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: ec2-managedinstance-applications-blacklisted
+name: EC2-MANAGEDINSTANCE-APPLICATIONS-BLACKLISTED
+labels:
+  - contextualization
+ 
+csp: aws
+service: ec2
+resource-type: instance
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - ec2-managedinstance-applications-blacklisted
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("ec2-managedinstance-applications-blacklisted"))
+ 
+risk-config:
+  default-risk: ""

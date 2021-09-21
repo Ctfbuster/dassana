@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: guardduty-enabled-centralized
+name: GUARDDUTY-ENABLED-CENTRALIZED
+labels:
+  - contextualization
+ 
+csp: aws
+service: guardduty
+resource-type: detector
+ 
+class: risk
+subclass: config
+category: uncategorized
+subcategory: best-practice
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - guardduty-enabled-centralized
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("guardduty-enabled-centralized"))
+ 
+risk-config:
+  default-risk: high

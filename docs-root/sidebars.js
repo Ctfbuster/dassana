@@ -53,15 +53,15 @@ module.exports = {
 								'guides/workflow-authoring/policy-context'
 							]
 						},
-                        {
-                            type: 'category',
-                            label: 'Valid Structure',
-                            items: [
-								'guides/valid-structure/resource-fields',
-								'guides/valid-structure/policy-fields',
-                            ]
-                        },
-						'guides/action-authoring/action',
+						{
+							type: 'category',
+							label: 'Classification',
+							items: [
+								'guides/classification/resource-hierarchy',
+								'guides/classification/policy'
+							]
+						},
+						'guides/action-authoring/action'
 					]
 				},
 				{

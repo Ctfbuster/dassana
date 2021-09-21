@@ -16,7 +16,7 @@ public class CommonLinter {
 
 	private final static String actionTemplatePath = "/actions";
 	private final static String[] requiredFields = new String[]{"vendorId", "alertId", "vendorPolicy", "csp", "resourceContainer",
-					"region", "service", "resourceType", "resourceId"};
+					"region", "resourceId"};
 
 	private Gson gson = new Gson();
 	private Set<String> actions = new HashSet<>();

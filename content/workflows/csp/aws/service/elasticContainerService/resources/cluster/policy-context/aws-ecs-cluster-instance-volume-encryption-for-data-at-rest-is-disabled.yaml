@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-ecs-cluster-instance-volume-encryption-for-data-at-rest-is-disabled
+name: AWS ECS Cluster instance volume encryption for data at rest is disabled
+labels:
+  - contextualization
+ 
+csp: aws
+service: elasticContainerService
+resource-type: cluster
+ 
+class: risk
+subclass: config
+category: storage
+subcategory: encryption
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - d00b3874-3bca-43df-b835-34cec48c7f0f
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "d00b3874-3bca-43df-b835-34cec48c7f0f"
+ 
+risk-config:
+  default-risk: medium

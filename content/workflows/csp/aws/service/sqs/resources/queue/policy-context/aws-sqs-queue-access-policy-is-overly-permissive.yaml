@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-sqs-queue-access-policy-is-overly-permissive
+name: AWS SQS queue access policy is overly permissive
+labels:
+  - contextualization
+ 
+csp: aws
+service: sqs
+resource-type: queue
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: authorization
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - bfe88196-dc6b-4c34-bda7-ef4b90942544
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "bfe88196-dc6b-4c34-bda7-ef4b90942544"
+ 
+risk-config:
+  default-risk: high

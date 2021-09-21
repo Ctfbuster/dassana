@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: fms-webacl-rulegroup-association-check
+name: FMS-WEBACL-RULEGROUP-ASSOCIATION-CHECK
+labels:
+  - contextualization
+ 
+csp: aws
+service: firewallManager
+resource-type: policy
+ 
+class: risk
+subclass: config
+category: networking
+subcategory: firewall
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - fms-webacl-rulegroup-association-check
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("fms-webacl-rulegroup-association-check"))
+ 
+risk-config:
+  default-risk: ""

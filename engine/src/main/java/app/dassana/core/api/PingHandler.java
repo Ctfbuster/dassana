@@ -9,7 +9,7 @@ public class PingHandler {
 
   private final String[] responseStr = new String[]{"A termite walks into the bar and asks, ‘Is the bar tender here?’",
       "People who use selfie sticks really need to have a good, long look at themselves.",
-      "People who use selfie sticks really need to have a good, long look at themselves.",
+      "Why do bees have sticky hair? Because they use a honeycomb.",
       "Just burned 2,000 calories. That’s the last time I leave brownies in the oven while I nap.",
       "I’m reading a book about anti-gravity. It’s impossible to put down."};
 
