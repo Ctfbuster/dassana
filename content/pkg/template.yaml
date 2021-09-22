@@ -575,12 +575,12 @@ Resources:
         Fn::GetAtt: [DassanaActionsRole, Arn]
       Timeout: 60
 
-  WhatPermsAreGrantedToRole:
+  GetIAMPolicyRisks:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/handler.handle
       Runtime: python3.7
-      CodeUri: ../actions/what-perms-are-granted-to-role
+      CodeUri: ../actions/get-iam-policy-risks
       Layers:
         - !Ref DassanaActionsPythonLayer
       Role:
