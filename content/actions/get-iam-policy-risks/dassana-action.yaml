@@ -1,0 +1,19 @@
+schema: 1.0
+id: GetIAMPolicyRisks
+name: Get permissions and cloudsplaining findings for an IAM identity
+
+cloud-type: aws
+service: iam
+resource-type: policy
+
+runs-on: aws-lambda
+
+license:
+  url: https://www.apache.org/licenses/LICENSE-2.0
+  id: Apache
+author:
+  name: Kaushik Devireddy
+  email: kdev@ucla.edu
+compatible-type: policy-context
+labels:
+  - policy-context
