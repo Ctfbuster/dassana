@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: s3-bucket-versioning-enabled
-name: S3-BUCKET-VERSIONING-ENABLED
+id: s3-bucket-replication-is-not-enabled
+name: Bucket does not have cross-region replication enabled
 labels:
   - contextualization
  
@@ -18,10 +18,10 @@ subcategory: availability
 filters:
   - vendor: aws-config
     policies:
-      - s3-bucket-versioning-enabled
+      - s3-bucket-replication-enabled
     match-type: any
     rules:
-      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-versioning-enabled"))
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-replication-enabled"))
  
 risk-config:
   default-risk: ""

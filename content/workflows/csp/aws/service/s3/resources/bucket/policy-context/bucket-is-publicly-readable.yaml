@@ -1,46 +1,37 @@
 schema: 1
 type: policy-context
-
-id: bucket-has-broad-access-permissions
-name: S3 bucket is configured with an overly broad ACL
+ 
+id: bucket-publicly-readable
+name: Bucket publicly readable
 labels:
   - contextualization
-
+ 
 csp: aws
 service: s3
 resource-type: bucket
-
+ 
 class: risk
 subclass: config
 category: iam
 subcategory: public-access
-
+ 
 filters:
   - vendor: aws-config
     policies:
-      - "s3-bucket-blacklisted-actions-prohibited"
       - "s3-bucket-public-read-prohibited"
-      - "s3-bucket-public-write-prohibited"
     match-type: any
     rules:
-      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-blacklisted-actions-prohibited"))
       - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-public-read-prohibited"))
-      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-public-write-prohibited"))
   - vendor: prisma-cloud
     policies:
-      - "085de1e7-7eb5-4fde-9a14-56f563c54ed3"
-      - "98340798-8e9f-4b4e-8c34-b001307fda3a"
-      - "f0235acc-737d-4a54-8d2c-a05da32663bd"
       - "e0b4379d-6692-41ab-bd33-10cbac836b1e"
+      - "f0235acc-737d-4a54-8d2c-a05da32663bd"
       - "630d3779-d932-4fbf-9cce-6e8d793c6916"
     match-type: any
     rules:
-      - .vendorId == "prisma-cloud" and .vendorPolicy == "085de1e7-7eb5-4fde-9a14-56f563c54ed3"
-      - .vendorId == "prisma-cloud" and .vendorPolicy == "98340798-8e9f-4b4e-8c34-b001307fda3a"
-      - .vendorId == "prisma-cloud" and .vendorPolicy == "f0235acc-737d-4a54-8d2c-a05da32663bd"
       - .vendorId == "prisma-cloud" and .vendorPolicy == "e0b4379d-6692-41ab-bd33-10cbac836b1e"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "f0235acc-737d-4a54-8d2c-a05da32663bd"
       - .vendorId == "prisma-cloud" and .vendorPolicy == "630d3779-d932-4fbf-9cce-6e8d793c6916"
-
 steps:
   - id: website-info
     uses: WebsiteContext
@@ -51,7 +42,7 @@ steps:
         value: .region
 
 risk-config:
-  default-risk: critical
+  default-risk: high
   rules:
     - name: bucket-has-associated-website
       condition: ."website-info".bucketWebsiteUrl | length > 0

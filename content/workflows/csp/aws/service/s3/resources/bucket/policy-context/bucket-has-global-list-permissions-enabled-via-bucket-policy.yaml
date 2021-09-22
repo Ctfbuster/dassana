@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: aws-s3-bucket-has-global-list-permissions-enabled-via-bucket-policy
-name: AWS S3 Bucket has Global LIST Permissions enabled via bucket policy
+id: bucket-has-global-list-permissions-enabled-via-bucket-policy
+name: Bucket has Global LIST Permissions enabled via bucket policy
 labels:
   - contextualization
  

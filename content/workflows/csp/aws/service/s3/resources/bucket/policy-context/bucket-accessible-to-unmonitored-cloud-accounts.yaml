@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: aws-access-logging-not-enabled-on-s3-buckets
-name: AWS Access logging not enabled on S3 buckets
+id: bucket-accessible-to-unmonitored-cloud-accounts
+name: Bucket accessible to unmonitored cloud accounts
 labels:
   - contextualization
  
@@ -13,15 +13,15 @@ resource-type: bucket
 class: risk
 subclass: config
 category: visibility
-subcategory: logging
+subcategory: hygiene
  
 filters:
   - vendor: prisma-cloud
     policies:
-      - 4daa435b-fa46-457a-9359-6a4b4a43a442
+      - ea712527-83e7-7855-0ec9-1610194a9b9b
     match-type: any
     rules:
-      - .vendorId == "prisma-cloud" and .vendorPolicy == "4daa435b-fa46-457a-9359-6a4b4a43a442"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "ea712527-83e7-7855-0ec9-1610194a9b9b"
  
 risk-config:
   default-risk: medium

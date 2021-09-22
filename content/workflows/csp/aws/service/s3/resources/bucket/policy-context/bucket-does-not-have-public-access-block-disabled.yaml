@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
 
-id: bucket-does-not-have-public-access-block
-name: S3 bucket does not have public access block
+id: bucket-does-not-have-public-access-block-disabled
+name: Bucket does not have public access block disabled
 labels:
   - contextualization
 
@@ -34,4 +34,4 @@ filters:
       - .vendorId == "prisma-cloud" and .vendorPolicy == "b76ad441-e715-4fd0-bbc3-cd3b2bee34bf"
 
 risk-config:
-  default-risk: ""
+  default-risk: "medium"

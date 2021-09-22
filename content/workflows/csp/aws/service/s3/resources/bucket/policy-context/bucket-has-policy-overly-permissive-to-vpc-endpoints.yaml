@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: aws-s3-bucket-having-policy-overly-permissive-to-vpc-endpoints
-name: AWS S3 bucket having policy overly permissive to VPC endpoints
+id: bucket-having-policy-overly-permissive-to-vpc-endpoints
+name: Bucket having policy overly permissive to VPC endpoints
 labels:
   - contextualization
  

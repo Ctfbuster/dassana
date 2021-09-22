@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: aws-s3-buckets-are-accessible-to-any-authenticated-user
-name: AWS S3 buckets are accessible to any authenticated user
+id: bucket-is-accessible-to-any-authenticated-user
+name: Bucket is accessible to any authenticated user
 labels:
   - contextualization
  

@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: aws-s3-bucket-has-global-view-acl-permissions-enabled
-name: AWS S3 bucket has global view ACL permissions enabled
+id: bucket-has-global-view-acl-permissions-enabled
+name: Bucket has global view ACL permissions enabled
 labels:
   - contextualization
  

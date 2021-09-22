@@ -2,7 +2,7 @@ schema: 1
 type: policy-context
 
 id: bucket-is-not-encrypted
-name: S3 bucket is not encrypted
+name: Bucket is not encrypted
 labels:
   - contextualization
 

@@ -2,7 +2,7 @@ schema: 1
 type: policy-context
 
 id: requests-do-not-use-ssl
-name: S3 bucket requests do not use SSL
+name: Bucket requests do not use SSL
 labels:
   - contextualization
 

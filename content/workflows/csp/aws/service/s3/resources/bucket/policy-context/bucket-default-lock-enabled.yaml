@@ -2,7 +2,7 @@ schema: 1
 type: policy-context
  
 id: s3-bucket-default-lock-enabled
-name: S3-BUCKET-DEFAULT-LOCK-ENABLED
+name: Bucket does not have lock enabled by default
 labels:
   - contextualization
  

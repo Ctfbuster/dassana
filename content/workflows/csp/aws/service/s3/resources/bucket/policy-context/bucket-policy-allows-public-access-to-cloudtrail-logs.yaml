@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: aws-s3-bucket-policy-allows-public-access-to-cloudtrail-logs
-name: AWS S3 Bucket Policy allows public access to CloudTrail logs
+id: bucket-policy-allows-public-access-to-cloudtrail-logs
+name: Bucket Policy allows public access to CloudTrail logs
 labels:
   - contextualization
  

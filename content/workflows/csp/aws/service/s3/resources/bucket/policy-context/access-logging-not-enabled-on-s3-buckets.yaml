@@ -1,0 +1,27 @@
+schema: 1
+type: policy-context
+ 
+id: aws-access-logging-not-enabled-on-s3-buckets
+name: Bucket access logging is not enabled on S3 buckets
+labels:
+  - contextualization
+ 
+csp: aws
+service: s3
+resource-type: bucket
+ 
+class: risk
+subclass: config
+category: visibility
+subcategory: logging
+ 
+filters:
+  - vendor: prisma-cloud
+    policies:
+      - 4daa435b-fa46-457a-9359-6a4b4a43a442
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "4daa435b-fa46-457a-9359-6a4b4a43a442"
+ 
+risk-config:
+  default-risk: medium

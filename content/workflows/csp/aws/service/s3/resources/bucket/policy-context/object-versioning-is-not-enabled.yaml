@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: aws-s3-object-versioning-is-disabled
-name: AWS S3 Object Versioning is disabled
+id: object-versioning-is-not-enabled
+name: Bucket Object Versioning is not enabled
 labels:
   - contextualization
  

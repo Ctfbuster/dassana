@@ -1,0 +1,24 @@
+schema: 1
+type: policy-context
+
+id: bucket-has-blocklisted-action-permissions
+name: Bucket is configured with blocklisted action permissions
+labels:
+  - contextualization
+
+csp: aws
+service: s3
+resource-type: bucket
+
+class: risk
+subclass: config
+category: iam
+subcategory: public-access
+
+filters:
+  - vendor: aws-config
+    policies:
+      - "s3-bucket-blacklisted-actions-prohibited"
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-blacklisted-actions-prohibited"))

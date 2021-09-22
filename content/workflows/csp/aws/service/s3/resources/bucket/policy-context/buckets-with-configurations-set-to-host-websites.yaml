@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: s3-buckets-with-configurations-set-to-host-websites
-name: S3 buckets with configurations set to host websites
+id: buckets-with-configurations-set-to-host-websites
+name: Bucket with configuration set to host website
 labels:
   - contextualization
  

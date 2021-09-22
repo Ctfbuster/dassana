@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: s3-bucket-policy-not-more-permissive
-name: S3-BUCKET-POLICY-NOT-MORE-PERMISSIVE
+id: s3-bucket-policy-grantee-check
+name: Bucket access is not restricted by bucket policy
 labels:
   - contextualization
  
@@ -18,10 +18,10 @@ subcategory: authorization
 filters:
   - vendor: aws-config
     policies:
-      - s3-bucket-policy-not-more-permissive
+      - s3-bucket-policy-grantee-check
     match-type: any
     rules:
-      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-policy-not-more-permissive"))
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-policy-grantee-check"))
  
 risk-config:
   default-risk: ""

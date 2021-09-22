@@ -1,0 +1,37 @@
+schema: 1
+type: policy-context
+ 
+id: bucket-publicly-writable
+name: Bucket publicly writable
+labels:
+  - contextualization
+ 
+csp: aws
+service: s3
+resource-type: bucket
+ 
+class: risk
+subclass: config
+category: iam
+subcategory: public-access
+ 
+filters:
+  - vendor: aws-config
+    policies:
+      - "s3-bucket-public-write-prohibited"
+    match-type: any
+    rules:
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-public-write-prohibited"))
+  - vendor: prisma-cloud
+    policies:
+      - "55b4de5f-2b59-4545-ac0c-f4ebad2e3add"
+      - "085de1e7-7eb5-4fde-9a14-56f563c54ed3"
+      - "98340798-8e9f-4b4e-8c34-b001307fda3a"
+    match-type: any
+    rules:
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "55b4de5f-2b59-4545-ac0c-f4ebad2e3add"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "085de1e7-7eb5-4fde-9a14-56f563c54ed3"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "98340798-8e9f-4b4e-8c34-b001307fda3a"
+
+risk-config:
+  default-risk: critical

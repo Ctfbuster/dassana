@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: aws-cloudtrail-s3-buckets-have-not-enabled-mfa-delete
-name: AWS CloudTrail S3 buckets have not enabled MFA Delete
+id: cloudtrail-bucket-has-not-enabled-mfa-delete
+name: Bucket with CloudTrail logs has not enabled MFA Delete
 labels:
   - contextualization
  

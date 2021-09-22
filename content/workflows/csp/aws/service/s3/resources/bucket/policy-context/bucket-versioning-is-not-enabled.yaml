@@ -1,8 +1,8 @@
 schema: 1
 type: policy-context
  
-id: s3-bucket-replication-enabled
-name: S3-BUCKET-REPLICATION-ENABLED
+id: s3-bucket-versioning-is-not-enabled
+name: Bucket versioning is not enabled
 labels:
   - contextualization
  
@@ -18,10 +18,10 @@ subcategory: availability
 filters:
   - vendor: aws-config
     policies:
-      - s3-bucket-replication-enabled
+      - s3-bucket-versioning-enabled
     match-type: any
     rules:
-      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-replication-enabled"))
+      - .vendorId == "aws-config" and (.vendorPolicy |contains ("s3-bucket-versioning-enabled"))
  
 risk-config:
   default-risk: ""
