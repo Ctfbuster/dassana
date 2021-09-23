@@ -1,4 +1,3 @@
-from functools import partial
 from json import load
 from typing import Dict, Any, Optional
 
@@ -7,7 +6,7 @@ from aws_lambda_powertools.utilities.validation import validator
 from botocore.exceptions import ClientError
 from aws_lambda_powertools import Logger
 
-from dassana.common.aws_client import DassanaAwsObject, parse_arn
+from dassana.common.aws_client import DassanaAwsObject
 from dassana.common.cache import configure_ttl_cache
 
 with open('input.json', 'r') as schema:
