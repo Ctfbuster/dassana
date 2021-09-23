@@ -16,7 +16,7 @@ with open('input.json', 'r') as schema:
 
 logger = Logger(service='dassana-actions')
 
-make_cached_call = configure_ttl_cache(1024, 60)
+get_cached_client = configure_ttl_cache(1024, 60)
 
 
 @logger.inject_lambda_context
@@ -25,7 +25,7 @@ def handle(event: Dict[str, Optional[Any]], context: LambdaContext):
     bucket_name = event.get('bucketName')
     region = event.get('region')
 
-    client = make_cached_call(partial(dassana_aws.create_aws_client, context=context), service='s3', region=region)
+    client = get_cached_client(dassana_aws.create_aws_client, context=context, service='s3', region=region)
 
     try:
         bucket_website = client.get_bucket_website(Bucket=bucket_name)

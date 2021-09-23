@@ -21,7 +21,7 @@ def tag_mapping(tags):
     return [{'name': tag['Key'], 'value': tag['Value']} for tag in tags]
 
 
-make_cached_call = configure_ttl_cache(1024, 60)
+get_cached_client = configure_ttl_cache(1024, 60)
 
 
 @logger.inject_lambda_context
@@ -39,7 +39,7 @@ def handle(event: Dict[str, Optional[Any]], context: LambdaContext):
         region = event.get('region')
 
     if service == 'iam':
-        client = make_cached_call(partial(dassana_aws.create_aws_client, context=context), service='iam', region=region)
+        client = get_cached_client(dassana_aws.create_aws_client, context=context, service='iam', region=region)
         resource_type = arn_component.resource_type
         resource = arn_component.resource
         try:
@@ -61,8 +61,8 @@ def handle(event: Dict[str, Optional[Any]], context: LambdaContext):
             else:
                 raise e
     else:
-        client = make_cached_call(partial(dassana_aws.create_aws_client, context=context),
-                                  service='resourcegroupstaggingapi', region=region)
+        client = get_cached_client(dassana_aws.create_aws_client, context=context, service='resourcegroupstaggingapi',
+                                  region=region)
         try:
             resp = client.get_resources(ResourceARNList=[
                 arn
