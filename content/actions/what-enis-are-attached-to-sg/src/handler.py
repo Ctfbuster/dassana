@@ -1,19 +1,24 @@
+from functools import partial
 from json import load, loads, dumps
 from typing import Dict, Any
 
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from aws_lambda_powertools.utilities.validation import validator
 from dassana.common.aws_client import DassanaAwsObject, parse_arn
+from dassana.common.cache import configure_ttl_cache
 
 with open('input.json', 'r') as schema:
     schema = load(schema)
     dassana_aws = DassanaAwsObject()
 
+make_cached_call = configure_ttl_cache(1024, 60)
+
 
 @validator(inbound_schema=schema)
 def handle(event: Dict[str, Any], context: LambdaContext):
     group_id = event.get('groupId')
-    client = dassana_aws.create_aws_client(context, 'ec2', event.get('region'))
+    client = make_cached_call(partial(dassana_aws.create_aws_client, context=context), service='ec2',
+                              region=event.get('region'))
 
     result = client.describe_network_interfaces(Filters=[
         {

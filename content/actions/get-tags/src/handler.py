@@ -1,3 +1,4 @@
+from functools import partial
 from json import load
 from typing import Dict, Any, Optional
 
@@ -7,6 +8,7 @@ from botocore.exceptions import ClientError
 from aws_lambda_powertools import Logger
 
 from dassana.common.aws_client import DassanaAwsObject, parse_arn
+from dassana.common.cache import configure_ttl_cache
 
 with open('input.json', 'r') as schema:
     schema = load(schema)
@@ -17,6 +19,9 @@ logger = Logger(service='dassana-actions')
 
 def tag_mapping(tags):
     return [{'name': tag['Key'], 'value': tag['Value']} for tag in tags]
+
+
+make_cached_call = configure_ttl_cache(1024, 60)
 
 
 @logger.inject_lambda_context
@@ -34,7 +39,7 @@ def handle(event: Dict[str, Optional[Any]], context: LambdaContext):
         region = event.get('region')
 
     if service == 'iam':
-        client = dassana_aws.create_aws_client(context, 'iam', region)
+        client = make_cached_call(partial(dassana_aws.create_aws_client, context=context), service='iam', region=region)
         resource_type = arn_component.resource_type
         resource = arn_component.resource
         try:
@@ -56,7 +61,8 @@ def handle(event: Dict[str, Optional[Any]], context: LambdaContext):
             else:
                 raise e
     else:
-        client = dassana_aws.create_aws_client(context, 'resourcegroupstaggingapi', region)
+        client = make_cached_call(partial(dassana_aws.create_aws_client, context=context),
+                                  service='resourcegroupstaggingapi', region=region)
         try:
             resp = client.get_resources(ResourceARNList=[
                 arn
@@ -64,7 +70,6 @@ def handle(event: Dict[str, Optional[Any]], context: LambdaContext):
             tag_set = resp.get('ResourceTagMappingList')
             if len(tag_set) > 0:
                 tag_set = tag_set[0].get('Tags')
-                print(tag_set)
                 return tag_mapping(tag_set)
             else:
                 return []

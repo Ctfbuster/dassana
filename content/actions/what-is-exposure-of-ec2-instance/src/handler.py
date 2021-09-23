@@ -1,3 +1,4 @@
+from functools import partial
 from json import load
 from typing import Dict, Any, List, Union
 
@@ -11,8 +12,10 @@ from pydantic.json import IPv4Address
 from json import loads
 
 from dassana.common.aws_client import DassanaAwsObject, parse_arn
+from dassana.common.cache import configure_ttl_cache
 
 logger = Logger(service='dassana-actions')
+make_cached_call = configure_ttl_cache(1024, 60)
 
 with open('input.json', 'r') as schema:
     schema = load(schema)
@@ -45,8 +48,10 @@ def handle(event: Dict[str, Any], context: LambdaContext):
     region = event.get('region')
     event_exceptions = event.get('exceptions', [])
 
-    ec2_client = dassana_aws.create_aws_client(context, 'ec2', region)
-    elb_client = dassana_aws.create_aws_client(context, 'elbv2', region)
+    ec2_client = make_cached_call(partial(dassana_aws.create_aws_client, context=context), service='ec2',
+                                  region=region)
+    elb_client = make_cached_call(partial(dassana_aws.create_aws_client, context=context), service='elbv2',
+                                  region=region)
     lb_paginator = elb_client.get_paginator('describe_load_balancers')
     tg_paginator = elb_client.get_paginator('describe_target_groups')
     page_iterator = lb_paginator.paginate()
@@ -153,7 +158,7 @@ def handle(event: Dict[str, Any], context: LambdaContext):
                                                           ])
         except ClientError as e:
             logger.error(e.response)
-            if e.response.get('Error').get('Code') in ['InvalidInstanceID.Malformed','InvalidInstanceID.NotFound']:
+            if e.response.get('Error').get('Code') in ['InvalidInstanceID.Malformed', 'InvalidInstanceID.NotFound']:
                 return False
             else:
                 raise Exception(e)
@@ -192,7 +197,7 @@ def handle(event: Dict[str, Any], context: LambdaContext):
         public_ip_address = instance_resp.get('Reservations')[0].get('Instances')[0].get(
             'PublicIpAddress')
 
-        if(public_ip_address != None):
+        if (public_ip_address != None):
             publicIp = IPv4Address(public_ip_address)
         else:
             publicIp = ''
