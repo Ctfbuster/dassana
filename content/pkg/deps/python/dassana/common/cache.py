@@ -1,5 +1,4 @@
-from functools import partial
-
+from aws_lambda_powertools.utilities.typing import LambdaContext
 from boto3 import client
 from cachetools import TTLCache, cached
 
@@ -33,17 +32,24 @@ class _HashedTuple(tuple):
 _kwmark = (_HashedTuple,)
 
 
-def generate_hashkey(client_call, *args, **kwargs):
+def generate_hash(client_call, *args, **kwargs):
     kwargs = {
         **kwargs
     }
-    return sum(sorted(kwargs.items()), _kwmark)
+    if client_call.keywords.get('context') and issubclass(type(client_call.keywords.get('context')), LambdaContext):
+        context = client_call.keywords.get('context')
+        context = dict(filter(lambda x: 'aws' in x[0], context.client_context.env.items()))
+        kwargs = {
+            **kwargs,
+            **context
+        }
+    return sum(sorted(kwargs.items()), _kwmark).__hash__()
 
 
-def configure_ttl_cache(maxsize=1024, ttl=600):
+def configure_ttl_cache(maxsize=1024, ttl=60):
     cache = TTLCache(maxsize=maxsize, ttl=ttl)
 
-    @cached(cache, key=generate_hashkey)
+    @cached(cache, key=generate_hash)
     def make_cached_call(client_call, *args, **kwargs) -> client:
         return client_call(**kwargs)
 
