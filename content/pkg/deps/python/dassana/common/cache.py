@@ -1,3 +1,5 @@
+from functools import partial
+
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from boto3 import client
 from cachetools import TTLCache, cached
@@ -33,12 +35,21 @@ _kwmark = (_HashedTuple,)
 
 
 def generate_hash(client_call, *args, **kwargs):
-    kwargs = {
-        **kwargs
-    }
-    if client_call.keywords.get('context') and issubclass(type(client_call.keywords.get('context')), LambdaContext):
-        context = client_call.keywords.get('context')
-        context = dict(filter(lambda x: 'aws' in x[0], context.client_context.env.items()))
+    if issubclass(type(client_call), partial) and client_call.keywords.get('context') and issubclass(
+            type(client_call.keywords.get('context')), LambdaContext):
+        context = dict(filter(lambda x:
+                              x[0] in ['aws_access_key_id', 'aws_secret_access_key', 'aws_session_token'],
+                              client_call.keywords.get(
+                                  'context').client_context.env.items()))
+        kwargs = {
+            **kwargs,
+            **context
+        }
+    elif issubclass(type(kwargs.get('context')), LambdaContext):
+        context = dict(filter(lambda x:
+                              x[0] in ['aws_access_key_id', 'aws_secret_access_key', 'aws_session_token'],
+                              kwargs.pop('context').client_context.env.items()))
+
         kwargs = {
             **kwargs,
             **context
