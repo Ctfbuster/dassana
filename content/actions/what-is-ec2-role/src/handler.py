@@ -1,10 +1,9 @@
-from functools import partial
 from json import load, loads, dumps
 from typing import Dict, Any
 
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from aws_lambda_powertools.utilities.validation import validator
-from dassana.common.aws_client import DassanaAwsObject, parse_arn
+from dassana.common.aws_client import DassanaAwsObject
 from dassana.common.cache import configure_ttl_cache
 
 with open('input.json', 'r') as schema:

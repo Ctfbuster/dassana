@@ -1,4 +1,3 @@
-from functools import partial
 from json import load
 from typing import Dict, Any, Optional
 
