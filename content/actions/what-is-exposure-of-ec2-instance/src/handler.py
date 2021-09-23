@@ -1,6 +1,5 @@
-from functools import partial
 from json import load
-from typing import Dict, Any, List, Union
+from typing import Dict, Any, List
 
 from aws_lambda_powertools import Logger
 from aws_lambda_powertools.utilities.typing import LambdaContext
@@ -11,11 +10,11 @@ from pydantic import BaseModel
 from pydantic.json import IPv4Address
 from json import loads
 
-from dassana.common.aws_client import DassanaAwsObject, parse_arn
+from dassana.common.aws_client import DassanaAwsObject
 from dassana.common.cache import configure_ttl_cache
 
 logger = Logger(service='dassana-actions')
-make_cached_call = configure_ttl_cache(1024, 60)
+get_cached_client = configure_ttl_cache(1024, 60)
 
 with open('input.json', 'r') as schema:
     schema = load(schema)
@@ -48,10 +47,10 @@ def handle(event: Dict[str, Any], context: LambdaContext):
     region = event.get('region')
     event_exceptions = event.get('exceptions', [])
 
-    ec2_client = make_cached_call(partial(dassana_aws.create_aws_client, context=context), service='ec2',
-                                  region=region)
-    elb_client = make_cached_call(partial(dassana_aws.create_aws_client, context=context), service='elbv2',
-                                  region=region)
+    ec2_client = get_cached_client(dassana_aws.create_aws_client, context=context, service='ec2',
+                                   region=region)
+    elb_client = get_cached_client(dassana_aws.create_aws_client, context=context, service='elbv2',
+                                   region=region)
     lb_paginator = elb_client.get_paginator('describe_load_balancers')
     tg_paginator = elb_client.get_paginator('describe_target_groups')
     page_iterator = lb_paginator.paginate()
@@ -61,7 +60,7 @@ def handle(event: Dict[str, Any], context: LambdaContext):
         direct={}
     )
 
-    def evaluate_app_layer(resource, event_exceptions):
+    def evaluate_app_layer(resource, event_exceptions_app_layer):
         for lb_page in page_iterator:
             for lb_arn, scheme in list(map(lambda x: (x['LoadBalancerArn'], x['Scheme']),
                                            lb_page['LoadBalancers'])):
@@ -140,11 +139,11 @@ def handle(event: Dict[str, Any], context: LambdaContext):
                                     # If the rules before auth involve EC2 as a target
                                     if is_subset:
                                         conditions = rule['Conditions']
-                                        auth_check.append(event_exceptions != conditions)
+                                        auth_check.append(event_exceptions_app_layer != conditions)
                                 if any(auth_check):
                                     exp.appLayer.canReceiveUnauthenticatedTraffic = True
                                     return
-                                elif len(event_exceptions) != 0:
+                                elif len(event_exceptions_app_layer) != 0:
                                     exp.appLayer.exceptionMatch = True
 
     def evaluate_direct(ec2_resource) -> bool:
@@ -197,13 +196,13 @@ def handle(event: Dict[str, Any], context: LambdaContext):
         public_ip_address = instance_resp.get('Reservations')[0].get('Instances')[0].get(
             'PublicIpAddress')
 
-        if (public_ip_address != None):
-            publicIp = IPv4Address(public_ip_address)
+        if public_ip_address is not None:
+            public_ip = IPv4Address(public_ip_address)
         else:
-            publicIp = ''
+            public_ip = ''
 
         exp.direct = {
-            'publicIp': publicIp,
+            'publicIp': public_ip,
             'allowedVia': {
                 'sg': open_groups
             },
