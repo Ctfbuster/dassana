@@ -17,7 +17,7 @@ get_cached_client = configure_ttl_cache(1024, 60)
 def handle(event: Dict[str, Any], context: LambdaContext):
     group_id = event.get('groupId')
     client = get_cached_client(dassana_aws.create_aws_client, context=context, service='ec2',
-                              region=event.get('region'))
+                               region=event.get('region'))
 
     result = client.describe_network_interfaces(Filters=[
         {

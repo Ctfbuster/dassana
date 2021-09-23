@@ -18,7 +18,7 @@ def handle(event: Dict[str, Any], context: LambdaContext):
     instance_id = event.get('instanceId')
 
     client = get_cached_client(dassana_aws.create_aws_client, context=context, service='ec2',
-                              region=event.get('region'))
+                               region=event.get('region'))
     try:
         result = client.describe_instances(
             Filters=[],
