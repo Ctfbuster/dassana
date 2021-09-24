@@ -72,7 +72,7 @@ def configure_ttl_cache(maxsize=1024, ttl=60, hash_op=dassana_generate_hash):
     Decorator that initializes a TTL Cache which is utilized in any subsequent function calls with the hashing key
     defined generate_hash. The following implementation is built as part of higher order functions to enable
     flexibility: the biggest benefit is caching can be deployed on any function calls throughout Dassana Actions whereby
-    the intention / control flow can be
+    the intention / control flow can be defined on a purpose basis.
 
     :param maxsize: maximium size of the TTL cache
     :param ttl: time to live (in seconds) of items in cache
