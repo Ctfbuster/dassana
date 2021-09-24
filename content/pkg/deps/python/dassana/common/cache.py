@@ -72,7 +72,7 @@ def configure_ttl_cache(maxsize=1024, ttl=60, hash_op=dassana_generate_hash):
     flexibility: the biggest benefit is caching can be deployed on any function calls throughout Dassana Actions whereby
     the intention / control flow can be defined on a purpose basis.
 
-    :param maxsize: maximium size of the TTL cache
+    :param maxsize: maximum size of the TTL cache
     :param ttl: time to live (in seconds) of items in cache
     :param hash_op: function with hashing scheme applying to the same args that make_cached_call consumes
     :return: a function with another function as its first parameter which calls on keyword arguments
