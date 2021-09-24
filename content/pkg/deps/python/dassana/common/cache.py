@@ -1,5 +1,3 @@
-from functools import partial
-
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from boto3 import client
 from cachetools import TTLCache, cached
@@ -45,12 +43,12 @@ def dassana_generate_hash(client_call, *args, **kwargs) -> int:
 
     For cross-account client fetching, DassanaEngine injects AWS credentials exchanged through STS as custom env
     in LambdaContext which is concatenated as a HashTuple with service and region to generate the hash. The creds
-    are unpacked as into **kwargs for hash generation (the sorting will ensure 1:1 hashing for identical objects
+    are unpacked into **kwargs for hash generation (the sorting will ensure 1:1 hashing for identical objects
     regardless of key order).
 
     :param client_call: function
     Not involved in the hashing scheme, it is just included in generate_hash as this function is wired
-    into the make_cached_call under config ure_ttl_cache.
+    into the make_cached_call under configure_ttl_cache.
     :param args: arguments
     :param kwargs: keyword arguments
     :return:
