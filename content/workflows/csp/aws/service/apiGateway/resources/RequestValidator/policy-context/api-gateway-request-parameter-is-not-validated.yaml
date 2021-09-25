@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
-id: aws-api-gateway-request-parameter-is-not-validated
-name: AWS API gateway request parameter is not validated
+
+id: api-gateway-request-parameter-is-not-validated
+name: API gateway request parameter is not validated
 labels:
   - contextualization
- 
+
 csp: aws
 service: apiGateway
 resource-type: RequestValidator
- 
+
 class: risk
 subclass: config
 category: networking
 subcategory: firewall
- 
+
 filters:
   - vendor: prisma-cloud
     policies:
@@ -22,6 +22,6 @@ filters:
     match-type: any
     rules:
       - .vendorId == "prisma-cloud" and .vendorPolicy == "fccd881f-26d1-485d-a742-3602afe72035"
- 
+
 risk-config:
   default-risk: medium

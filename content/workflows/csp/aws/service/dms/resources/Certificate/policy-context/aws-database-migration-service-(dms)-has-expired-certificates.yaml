@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
+
 id: aws-database-migration-service-(dms)-has-expired-certificates
 name: AWS Database Migration Service (DMS) has expired certificates
 labels:
   - contextualization
- 
+
 csp: aws
-service: certificateManager
-resource-type: certificate
- 
+service: dms
+resource-type: Certificate
+
 class: risk
 subclass: config
 category: crypto
 subcategory: certificate-management
- 
+
 filters:
   - vendor: prisma-cloud
     policies:
@@ -22,6 +22,6 @@ filters:
     match-type: any
     rules:
       - .vendorId == "prisma-cloud" and .vendorPolicy == "e1539f4f-7c9b-47bb-b3d5-9660f4ed0cda"
- 
+
 risk-config:
   default-risk: medium

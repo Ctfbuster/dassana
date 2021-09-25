@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
-id: aws-api-gateway-request-authorisation-is-not-set
-name: AWS API gateway request authorisation is not set
+
+id: api-gateway-request-authorization-is-not-set
+name: API gateway request authorization is not set
 labels:
   - contextualization
- 
+
 csp: aws
 service: apiGateway
 resource-type: Authorizer
- 
+
 class: risk
 subclass: config
 category: iam
 subcategory: authorization
- 
+
 filters:
   - vendor: prisma-cloud
     policies:
@@ -22,6 +22,6 @@ filters:
     match-type: any
     rules:
       - .vendorId == "prisma-cloud" and .vendorPolicy == "3bc575db-9c1c-4ae3-aeb1-107989ef6fca"
- 
+
 risk-config:
   default-risk: medium

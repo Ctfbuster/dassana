@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
-id: ec2-security-group-attached-to-eni
-name: EC2 security group is not attached to EC2 instance or ENI
+
+id: instance-is-using-security-group-not-attached-to-eni
+name: Instance is using a security group not attached to ENI
 labels:
   - contextualization
- 
+
 csp: aws
 service: ec2
 resource-type: instance
- 
+
 class: risk
 subclass: config
 category: networking
 subcategory: firewall
- 
+
 filters:
   - vendor: aws-config
     policies:
@@ -22,6 +22,6 @@ filters:
     match-type: any
     rules:
       - .vendorId == "aws-config" and (.vendorPolicy |contains ("ec2-security-group-attached-to-eni"))
- 
+
 risk-config:
   default-risk: ""

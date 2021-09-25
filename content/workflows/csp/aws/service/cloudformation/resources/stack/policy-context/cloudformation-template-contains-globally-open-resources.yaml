@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
-id: aws-cloudformation-template-contains-globally-open-resources
-name: AWS CloudFormation template contains globally open resources
+
+id: cloudformation-template-contains-globally-open-resources
+name: CloudFormation template contains globally open resources
 labels:
   - contextualization
- 
+
 csp: aws
 service: cloudformation
 resource-type: stack
- 
+
 class: risk
 subclass: config
 category: networking
 subcategory: firewall
- 
+
 filters:
   - vendor: prisma-cloud
     policies:
@@ -22,6 +22,6 @@ filters:
     match-type: any
     rules:
       - .vendorId == "prisma-cloud" and .vendorPolicy == "40351182-3b54-4f35-9e1e-423bbc5476ff"
- 
+
 risk-config:
   default-risk: low

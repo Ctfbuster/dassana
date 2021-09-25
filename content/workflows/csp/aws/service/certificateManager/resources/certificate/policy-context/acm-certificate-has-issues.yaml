@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
-id: acm-certificate-expiration-check
-name: ACM-CERTIFICATE-EXPIRATION-CHECK
+
+id: acm-certificate-has-issues
+name: ACM certificate has issues
 labels:
   - contextualization
- 
+
 csp: aws
 service: certificateManager
 resource-type: certificate
- 
+
 class: risk
 subclass: config
 category: crypto
 subcategory: certificate-management
- 
+
 filters:
   - vendor: aws-config
     policies:
@@ -25,9 +25,17 @@ filters:
   - vendor: prisma-cloud
     policies:
       - 369dcce6-f088-445d-95a7-777af0347821
+      - 01740791-ebd5-417a-bbfe-e1fdfc322dcc
+      - d1fae43a-5bb6-429a-945e-fec5e8d9c662
+      - 77450a1c-97c2-4d75-847d-1f9c48320a9d
+      - e8fe99a1-7b84-4b9e-a0e7-0777b12cb081
     match-type: any
     rules:
       - .vendorId == "prisma-cloud" and .vendorPolicy == "369dcce6-f088-445d-95a7-777af0347821"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "01740791-ebd5-417a-bbfe-e1fdfc322dcc"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "d1fae43a-5bb6-429a-945e-fec5e8d9c662"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "77450a1c-97c2-4d75-847d-1f9c48320a9d"
+      - .vendorId == "prisma-cloud" and .vendorPolicy == "e8fe99a1-7b84-4b9e-a0e7-0777b12cb081"
 
 risk-config:
   default-risk: medium

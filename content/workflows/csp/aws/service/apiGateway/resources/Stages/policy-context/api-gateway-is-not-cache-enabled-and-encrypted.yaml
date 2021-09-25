@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
-id: api-gw-cache-enabled-and-encrypted
-name: API-GW-CACHE-ENABLED-AND-ENCRYPTED
+
+id: api-gateway-is-not-cache-enabled-and-encrypted
+name: API gateway stage is not configured for caching or the cache is not encrypted
 labels:
   - contextualization
- 
+
 csp: aws
 service: apiGateway
 resource-type: Stages
- 
+
 class: risk
 subclass: config
 category: networking
 subcategory: encryption
- 
+
 filters:
   - vendor: aws-config
     policies:
@@ -22,6 +22,6 @@ filters:
     match-type: any
     rules:
       - .vendorId == "aws-config" and (.vendorPolicy |contains ("api-gw-cache-enabled-and-encrypted"))
- 
+
 risk-config:
   default-risk: ""

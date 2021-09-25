@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
-id: cloudformation-stack-notification-check
-name: CLOUDFORMATION-STACK-NOTIFICATION-CHECK
+
+id: cloudformation-stack-is-configured-without-sns-topic
+name: Cloudformation stack is configured without SNS topic to send event notifications
 labels:
   - contextualization
- 
+
 csp: aws
 service: cloudformation
 resource-type: stack
- 
+
 class: risk
 subclass: config
 category: visibility
 subcategory: logging
- 
+
 filters:
   - vendor: aws-config
     policies:
@@ -28,6 +28,6 @@ filters:
     match-type: any
     rules:
       - .vendorId == "prisma-cloud" and .vendorPolicy == "a89cca38-34d1-4c4e-b2dd-17654648a1ca"
- 
+
 risk-config:
-  default-risk: ""
+  default-risk: medium

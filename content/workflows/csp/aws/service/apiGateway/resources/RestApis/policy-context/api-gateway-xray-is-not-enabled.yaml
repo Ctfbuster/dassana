@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
-id: api-gw-xray-enabled
-name: API-GW-XRAY-ENABLED
+
+id: api-gateway-xray-is-not-enabled
+name: API gateway X-Ray tracing is not enabled
 labels:
   - contextualization
- 
+
 csp: aws
 service: apiGateway
 resource-type: RestApis
- 
+
 class: risk
 subclass: config
 category: visibility
 subcategory: logging
- 
+
 filters:
   - vendor: aws-config
     policies:
@@ -22,6 +22,6 @@ filters:
     match-type: any
     rules:
       - .vendorId == "aws-config" and (.vendorPolicy |contains ("api-gw-xray-enabled"))
- 
+
 risk-config:
   default-risk: low

@@ -1,20 +1,20 @@
 schema: 1
 type: policy-context
- 
-id: api-gw-ssl-enabled
-name: API-GW-SSL-ENABLED
+
+id: api-gateway-ssl-is-not-enabled
+name: API gateway SSL is not enabled
 labels:
   - contextualization
- 
+
 csp: aws
 service: apiGateway
 resource-type: Stage
- 
+
 class: risk
 subclass: config
 category: networking
 subcategory: encryption
- 
+
 filters:
   - vendor: aws-config
     policies:
@@ -22,6 +22,6 @@ filters:
     match-type: any
     rules:
       - .vendorId == "aws-config" and (.vendorPolicy |contains ("api-gw-ssl-enabled"))
- 
+
 risk-config:
   default-risk: medium
